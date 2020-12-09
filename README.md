@@ -55,9 +55,11 @@ You can add some actions in this callback with the tapped text.
 
 The widgets and methods in this package is expected to be used with RegExp. You can pick regExp from examples set in the package.
 
-| `hashTagRegExp` | Detects text start with hashtag |
-| `atSignRegExp`| Detects text start with at sign |
-| `hashTagAtSignRegExp`| Detects text start with hashtag or at sign |
+| sample regExp | detection target |
+| --- | --- |
+| `hashTagRegExp` | Words start with hashtag |
+| `atSignRegExp`| Words start with at sign |
+| `hashTagAtSignRegExp`| Words start with hashtag or at sign |
 
 - The detection rules are almost same as twitter.
    1. It needs space before `#` or `@`.
