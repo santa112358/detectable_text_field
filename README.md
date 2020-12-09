@@ -6,7 +6,7 @@ This is refinement of [hastagable](https://pub.dev/packages/hashtagable)
 
 ## Usage
 
--- **As TextField**
+#### As TextField
 
 ```dart
     DetectableTextField(
@@ -24,7 +24,7 @@ This is refinement of [hastagable](https://pub.dev/packages/hashtagable)
 
 Other arguments are basically same as material TextField.
 
--- **As ReadOnlyText**
+#### As ReadOnlyText
 
 If you want to use detection feature in the text only to display, `DetectableText` will help you.
 
@@ -51,7 +51,7 @@ The argument `onTap(String)` is called when user tapped a detected text.
 
 You can add some actions in this callback with the tapped text.
 
---  **Sample RegExp**
+#### Sample RegExp
 
 The widgets and methods in this package is expected to be used with RegExp. You can pick regExp from examples set in the package.
 
@@ -67,7 +67,7 @@ The widgets and methods in this package is expected to be used with RegExp. You 
 
 - The examples currently support six languages: English, Japanese, Korean, Spanish, Arabic, and Thai.
 
-## Customize with useful functions
+#### Customize with useful functions
 
 - Check if there are detections
 
