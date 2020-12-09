@@ -1,8 +1,8 @@
 name: detectable_text_field
-description: A new Flutter package.
+description: Text widgets with detection feature. You can detect hashtags, at sign, or anything you want. Refinement of hashtagable
 version: 0.0.1
-author:
-homepage:
+author: Santa Takahashi
+homepage: https://github.com/santa112358/detectable_text_field
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
