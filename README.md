@@ -1,6 +1,6 @@
 # detectable_text_field
 
-[![pub package](https://img.shields.io/pub/v/hashtagable.svg)](https://pub.dev/packages/detectable_text_field) <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="License: MIT"></a>
+[![pub package](https://img.shields.io/pub/v/detectable_text_field.svg)](https://pub.dev/packages/detectable_text_field) <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="License: MIT"></a>
 
 Text widgets with detection feature. You can detect hashtags, at sign, or anything you want.
 
