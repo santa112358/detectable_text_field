@@ -4,6 +4,8 @@ Text widgets with detection feature. You can detect hashtags, at sign, or anythi
 
 Refinement of [hastagable](https://pub.dev/packages/hashtagable).
 
+![final](https://user-images.githubusercontent.com/43510799/101687421-ce4f7880-3aad-11eb-9723-f92b00ce05b8.gif)
+
 ## Usage
 
 ### As TextField
@@ -64,6 +66,7 @@ The widgets and methods in this package is expected to be used with RegExp. You 
 - The detection rules are almost same as twitter.
    1. It needs space before `#` or `@`.
    2. It stops detection if there's emoji or symbol.
+<img src ="https://user-images.githubusercontent.com/43510799/93002102-3655f780-f56f-11ea-8193-1753a69e23bc.jpg" width = "265"/>
 
 - The examples currently support six languages: English, Japanese, Korean, Spanish, Arabic, and Thai.
 
