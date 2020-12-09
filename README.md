@@ -2,7 +2,7 @@
 
 Text widgets with detection feature. You can detect hashtags, at sign, or anything you want.
 
-This is refinement of [hastagable](https://pub.dev/packages/hashtagable)
+Refinement of [hastagable](https://pub.dev/packages/hashtagable).
 
 ## Usage
 
@@ -20,9 +20,9 @@ This is refinement of [hastagable](https://pub.dev/packages/hashtagable)
       ),
     )
 ```
-`detectionRegExp` decides the text to detect. `detectedStyle` is the textStyle for detected text. basicStyle is the textStyle for not detected text.
+- `detectionRegExp` decides the text to detect. `detectedStyle` is the textStyle for detected text. basicStyle is the textStyle for not detected text.
 
-Other arguments are basically same as material TextField.
+- Other arguments are basically same as material TextField.
 
 ### As ReadOnlyText
 
@@ -67,6 +67,8 @@ The widgets and methods in this package is expected to be used with RegExp. You 
 
 - The examples currently support six languages: English, Japanese, Korean, Spanish, Arabic, and Thai.
 
+- The sample for url detection is planned to be added.
+
 ### Customize with useful functions
 
 - Check if there are detections
@@ -86,3 +88,5 @@ The widgets and methods in this package is expected to be used with RegExp. You 
    // ["#Hello", "#Flutter", "#Thank"]
 
 ```
+
+If you have any requests or questions, please feel free to ask on [github](https://github.com/santa112358/detectable_text_field/issues).
