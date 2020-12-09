@@ -68,6 +68,8 @@ The widgets and methods in this package is expected to be used with RegExp. You 
 - The detection rules are almost same as twitter.
    1. It needs space before `#` or `@`.
    2. It stops detection if there's emoji or symbol.
+
+
 <img src ="https://user-images.githubusercontent.com/43510799/93002102-3655f780-f56f-11ea-8193-1753a69e23bc.jpg" width = "265"/>
 
 - The examples currently support six languages: English, Japanese, Korean, Spanish, Arabic, and Thai.
