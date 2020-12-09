@@ -1,15 +1,15 @@
-import 'package:detectable_text_field/detector/detector.dart' as decorator;
+import 'package:detectable_text_field/detector/detector.dart' as detector;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-/// Add composing to hashtag decorated text.
+/// Add composing to detected text.
 class Composer {
   // TODO(Takahashi): Add test code for composing
   TextSpan getComposedTextSpan(
       {@required TextRange composing,
-      @required List<decorator.Detection> decorations,
+      @required List<detector.Detection> detections,
       @required sourceText}) {
-    final span = decorations.map(
+    final span = detections.map(
       (item) {
         final spanRange = item.range;
         final spanStyle = item.style;

@@ -14,7 +14,7 @@ class Detection extends Comparable<Detection> {
   }
 }
 
-/// Hold functions to decorate tagged text
+/// Hold functions to detect text
 ///
 /// Return the list of [Detection] in [getDetections]
 class Detector {
@@ -33,7 +33,7 @@ class Detector {
     TextRange previousItem;
     final result = List<Detection>();
     for (var tag in tags) {
-      ///Add untagged content
+      ///Add undetected content
       if (previousItem == null) {
         if (tag.start > 0) {
           result.add(Detection(
@@ -45,14 +45,14 @@ class Detector {
             style: textStyle));
       }
 
-      ///Add tagged content
+      ///Add detected content
       result.add(Detection(
           range: TextRange(start: tag.start, end: tag.end),
           style: detectedStyle));
       previousItem = TextRange(start: tag.start, end: tag.end);
     }
 
-    ///Add remaining untagged content
+    ///Add remaining undetected content
     if (result.last.range.end < copiedText.length) {
       result.add(Detection(
           range:
@@ -62,7 +62,7 @@ class Detector {
     return result;
   }
 
-  ///Decorate tagged content, filter out the ones includes emoji.
+  ///filter out the ones includes emoji.
   List<Detection> _getEmojiFilteredDetections(
       {List<Detection> source,
       String copiedText,
@@ -125,12 +125,12 @@ class Detector {
       return [];
     }
 
-    final sourceDecorations = _getSourceDetections(tags, copiedText);
+    final sourceDetections = _getSourceDetections(tags, copiedText);
 
     final emojiFilteredResult = _getEmojiFilteredDetections(
         copiedText: copiedText,
         emojiMatches: emojiMatches,
-        source: sourceDecorations);
+        source: sourceDetections);
 
     return emojiFilteredResult;
   }

@@ -14,10 +14,10 @@ bool isDetected(String value, RegExp detectionRegExp) {
     detectionRegExp: detectionRegExp,
   );
   final result = detector.getDetections(value);
-  final taggedDecorations = result
-      .where((decoration) => decoration.style.color == decoratedTextColor)
+  final detections = result
+      .where((detection) => detection.style.color == decoratedTextColor)
       .toList();
-  return taggedDecorations.isNotEmpty;
+  return detections.isNotEmpty;
 }
 
 /// Extract detections from the text
@@ -41,7 +41,7 @@ List<String> extractDetections(String value, RegExp detectionRegExp) {
 
 /// Returns textSpan with detected text
 ///
-/// Used in [HashTagText]
+/// Used in [DetectableText]
 TextSpan getDetectedTextSpan({
   @required TextStyle decoratedStyle,
   @required TextStyle basicStyle,
@@ -50,22 +50,22 @@ TextSpan getDetectedTextSpan({
   Function(String) onTap,
   bool decorateAtSign = false,
 }) {
-  final decorations = Detector(
+  final detections = Detector(
     detectedStyle: decoratedStyle,
     textStyle: basicStyle,
     detectionRegExp: detectionRegExp,
   ).getDetections(source);
-  if (decorations.isEmpty) {
+  if (detections.isEmpty) {
     return TextSpan(text: source, style: basicStyle);
   } else {
-    decorations.sort();
-    final span = decorations
+    detections.sort();
+    final span = detections
         .asMap()
         .map(
           (index, item) {
             final recognizer = TapGestureRecognizer()
               ..onTap = () {
-                final decoration = decorations[index];
+                final decoration = detections[index];
                 if (decoration.style == decoratedStyle) {
                   onTap(decoration.range.textInside(source).trim());
                 }

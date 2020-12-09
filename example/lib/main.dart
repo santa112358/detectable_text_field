@@ -50,11 +50,21 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             DetectableTextField(
               detectionRegExp: hashTagRegExp,
+              detectedStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.blue,
+              ),
+              basicStyle: TextStyle(
+                fontSize: 20,
+              ),
             ),
             const SizedBox(height: 32),
             DetectableText(
               text: "#HashTag and @AtSign",
               detectionRegExp: hashTagAtSignRegExp,
+              onTap: (tappedText) {
+                print(tappedText);
+              },
             ),
           ],
         ),

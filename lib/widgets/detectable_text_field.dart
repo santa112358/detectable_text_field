@@ -229,7 +229,7 @@ class DetectableTextField extends StatefulWidget {
                   )),
         super(key: key);
 
-  /// TextStyle of hashTag
+  /// TextStyle of detected text
   final TextStyle detectedStyle;
 
   final RegExp detectionRegExp;
@@ -787,11 +787,11 @@ class _DetectableTextFieldState extends State<DetectableTextField>
     super.dispose();
   }
 
-  DetectableEditableTextState get _hashTagEditableText =>
+  DetectableEditableTextState get _detectableEditableText =>
       editableTextKey.currentState;
 
   void _requestKeyboard() {
-    _hashTagEditableText?.requestKeyboard();
+    _detectableEditableText?.requestKeyboard();
   }
 
   bool _shouldShowSelectionHandles(SelectionChangedCause cause) {
@@ -825,7 +825,7 @@ class _DetectableTextFieldState extends State<DetectableTextField>
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
         if (cause == SelectionChangedCause.longPress) {
-          _hashTagEditableText?.bringIntoView(selection.base);
+          _detectableEditableText?.bringIntoView(selection.base);
         }
         return;
       case TargetPlatform.android:
@@ -839,7 +839,7 @@ class _DetectableTextFieldState extends State<DetectableTextField>
   /// Toggle the toolbar when a selection handle is tapped.
   void _handleSelectionHandleTapped() {
     if (_effectiveController.selection.isCollapsed) {
-      _hashTagEditableText.toggleToolbar();
+      _detectableEditableText.toggleToolbar();
     }
   }
 

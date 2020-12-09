@@ -1,15 +1,86 @@
 # detectable_text_field
 
-A new Flutter package.
+Text widgets with detection feature. You can detect hashtags, at sign, or anything you want.
 
-## Getting Started
+This is refinement of [hastagable](https://pub.dev/packages/hashtagable)
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+## Usage
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
-# detectable_text_field
+-- **As TextField**
+
+```dart
+    DetectableTextField(
+      detectionRegExp: hashTagRegExp,
+      detectedStyle: TextStyle(
+        fontSize: 20,
+        color: Colors.blue,
+      ),
+      basicStyle: TextStyle(
+        fontSize: 20,
+      ),
+    )
+```
+`detectionRegExp` decides the text to detect. `detectedStyle` is the textStyle for detected text. basicStyle is the textStyle for not detected text.
+
+Other arguments are basically same as material TextField.
+
+-- **As ReadOnlyText**
+
+If you want to use detection feature in the text only to display, `DetectableText` will help you.
+
+```dart
+    DetectableText(
+      text: "#HashTag and @AtSign",
+      detectionRegExp: hashTagAtSignRegExp,
+      detectedStyle: TextStyle(
+        fontSize: 20,
+        color: Colors.blue,
+      ),
+      basicStyle: TextStyle(
+        fontSize: 20,
+      ),
+      onTap: (tappedText){
+        print(tappedText);
+      },
+    )
+```
+
+Usage of the arguments like `detectionRegExp` are same as the ones in `DetectableTextField`.
+
+The argument `onTap(String)` is called when user tapped a detected text.
+
+You can add some actions in this callback with the tapped text.
+
+--  **Sample RegExp**
+
+The widgets and methods in this package is expected to be used with RegExp. You can pick regExp from examples set in the package.
+
+| `hashTagRegExp` | Detects text start with hashtag |
+| `atSignRegExp`| Detects text start with at sign |
+| `hashTagAtSignRegExp`| Detects text start with hashtag or at sign |
+
+- The detection rules are almost same as twitter.
+   1. It needs space before `#` or `@`.
+   2. It stops detection if there's emoji or symbol.
+
+- The examples currently support six languages: English, Japanese, Korean, Spanish, Arabic, and Thai.
+
+## Customize with useful functions
+
+- Check if there are detections
+
+```dart
+   print(isDetected("Hello #World", hashTagRegExp));
+   // true
+
+   print(isDetected("Hello World", hasgTagRegExp));
+   // false
+
+```
+- Extract detections from text
+
+```dart
+   final List<String> detections = extractDetections("#Hello World #Flutter Dart #Thank you", hashTagRegExp);
+   // ["#Hello", "#Flutter", "#Thank"]
+
+```

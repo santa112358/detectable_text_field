@@ -167,7 +167,7 @@ class DetectableEditableTextState extends EditableTextState {
       final composer = Composer();
       return composer.getComposedTextSpan(
         composing: composing,
-        decorations: decorations,
+        detections: decorations,
         sourceText: sourceText,
       );
     }
