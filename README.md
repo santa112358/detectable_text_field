@@ -4,7 +4,7 @@
 
 Text widgets with detection feature. You can detect hashtags, at sign, or anything you want.
 
-Refinement of [hastagable](https://pub.dev/packages/hashtagable).
+Refinement of [hashtagable](https://pub.dev/packages/hashtagable).
 
 ![final](https://user-images.githubusercontent.com/43510799/101687421-ce4f7880-3aad-11eb-9723-f92b00ce05b8.gif)
 
