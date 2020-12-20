@@ -56,6 +56,9 @@ class MyHomePage extends StatelessWidget {
                 basicStyle: TextStyle(
                   fontSize: 20,
                 ),
+                onDetectionTyped: (text) {
+                  print(text);
+                },
               ),
             ],
           ),

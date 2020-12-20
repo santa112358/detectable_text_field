@@ -4,11 +4,23 @@ import 'package:flutter/material.dart';
 
 /// Add composing to detected text.
 class Composer {
+  Composer({
+    @required this.detections,
+    @required this.composing,
+    @required this.sourceText,
+    @required this.onDetectionTyped,
+    @required this.selection,
+    @required this.detectedStyle,
+  });
+
+  final List<detector.Detection> detections;
+  final TextRange composing;
+  final String sourceText;
+  final ValueChanged<String> onDetectionTyped;
+  final int selection;
+  final TextStyle detectedStyle;
   // TODO(Takahashi): Add test code for composing
-  TextSpan getComposedTextSpan(
-      {@required TextRange composing,
-      @required List<detector.Detection> detections,
-      @required sourceText}) {
+  TextSpan getComposedTextSpan() {
     final span = detections.map(
       (item) {
         final spanRange = item.range;
@@ -68,5 +80,20 @@ class Composer {
       },
     ).toList();
     return TextSpan(children: span);
+  }
+
+  void callOnDetectionTyped() {
+    final typingDecoration = detections.firstWhere(
+      (decoration) =>
+          decoration.style == detectedStyle &&
+          decoration.range.start <= selection &&
+          decoration.range.end >= selection,
+      orElse: () {
+        return null;
+      },
+    );
+    if (typingDecoration != null) {
+      onDetectionTyped(typingDecoration.range.textInside(sourceText));
+    }
   }
 }

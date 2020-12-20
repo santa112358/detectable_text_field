@@ -20,6 +20,7 @@ class DetectableEditableText extends EditableText {
     @required this.detectedStyle,
     @required this.detectionRegExp,
     @required Color cursorColor,
+    @required this.onDetectionTyped,
     ValueChanged<String> onChanged,
     ValueChanged<String> onSubmitted,
     int maxLines,
@@ -127,6 +128,8 @@ class DetectableEditableText extends EditableText {
 
   final RegExp detectionRegExp;
 
+  final ValueChanged<String> onDetectionTyped;
+
   @override
   DetectableEditableTextState createState() => DetectableEditableTextState();
 }
@@ -138,11 +141,11 @@ class DetectableEditableTextState extends EditableTextState {
   @override
   DetectableEditableText get widget => super.widget;
 
-  Detector decorator;
+  Detector detector;
 
   @override
   void initState() {
-    decorator = Detector(
+    detector = Detector(
       textStyle: widget.style,
       detectedStyle: widget.detectedStyle,
       detectionRegExp: widget.detectionRegExp,
@@ -153,8 +156,8 @@ class DetectableEditableTextState extends EditableTextState {
   @override
   TextSpan buildTextSpan() {
     final String sourceText = textEditingValue.text;
-    final decorations = decorator.getDetections(sourceText);
-    if (decorations.isEmpty) {
+    final detections = detector.getDetections(sourceText);
+    if (detections.isEmpty) {
       /// use same method as default textField to show composing underline
       return widget.controller.buildTextSpan(
         style: widget.style,
@@ -162,14 +165,20 @@ class DetectableEditableTextState extends EditableTextState {
       );
     } else {
       /// use [Composer] to show composing underline
-      decorations.sort();
-      final composing = widget.controller.value.composing;
-      final composer = Composer();
-      return composer.getComposedTextSpan(
-        composing: composing,
-        detections: decorations,
+      detections.sort();
+      final composing = textEditingValue.composing;
+      final composer = Composer(
+        selection: textEditingValue?.selection?.start ?? -1,
+        onDetectionTyped: widget.onDetectionTyped,
         sourceText: sourceText,
+        detections: detections,
+        composing: composing,
+        detectedStyle: widget.detectedStyle,
       );
+      if (widget.onDetectionTyped != null) {
+        composer.callOnDetectionTyped();
+      }
+      return composer.getComposedTextSpan();
     }
   }
 }
