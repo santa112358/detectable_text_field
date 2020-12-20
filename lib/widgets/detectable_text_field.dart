@@ -136,6 +136,7 @@ class DetectableTextField extends StatefulWidget {
   const DetectableTextField({
     Key key,
     @required this.detectionRegExp,
+    this.onDetectionTyped,
     this.detectedStyle,
     this.controller,
     this.focusNode,
@@ -228,6 +229,8 @@ class DetectableTextField extends StatefulWidget {
                     paste: true,
                   )),
         super(key: key);
+
+  final ValueChanged<String> onDetectionTyped;
 
   /// TextStyle of detected text
   final TextStyle detectedStyle;
@@ -917,6 +920,7 @@ class _DetectableTextFieldState extends State<DetectableTextField>
         basicStyle: style,
         detectedStyle: detectedStyle,
         detectionRegExp: widget.detectionRegExp,
+        onDetectionTyped: widget.onDetectionTyped,
         readOnly: widget.readOnly,
         toolbarOptions: widget.toolbarOptions,
         showCursor: widget.showCursor,
