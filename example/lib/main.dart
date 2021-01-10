@@ -48,14 +48,10 @@ class MyHomePage extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               DetectableTextField(
-                detectionRegExp: hashTagAtSignRegExp,
-                detectedStyle: TextStyle(
-                  fontSize: 20,
-                  color: Colors.blue,
-                ),
-                basicStyle: TextStyle(
-                  fontSize: 20,
-                ),
+                maxLines: null,
+                controller: TextEditingController(
+                    text: "https://github.com/santa112358/"),
+                detectionRegExp: hashTagAtSignUrlRegExp,
                 onDetectionTyped: (text) {
                   print(text);
                 },

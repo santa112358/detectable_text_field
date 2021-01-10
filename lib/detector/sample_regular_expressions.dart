@@ -27,6 +27,12 @@ const detectionContentLetters = _symbols +
     _arabicLetters +
     _thaiLetters;
 
+const urlRegexContent = "((http|https)://)(www.)?" +
+    "[a-zA-Z0-9@:%._\\+~#?&//=]" +
+    "{2,256}\\.[a-z]" +
+    "{2,6}\\b([-a-zA-Z0-9@:%" +
+    "._\\+~#?&//=]*)";
+
 /// Regular expression to extract hashtag
 ///
 /// Supports English, Japanese, Korean, Spanish, Arabic, and Thai
@@ -40,8 +46,18 @@ final atSignRegExp = RegExp(
   multiLine: true,
 );
 
+final urlRegex = RegExp(
+  urlRegexContent,
+  multiLine: true,
+);
+
 /// Regular expression when you select decorateAtSign
 final hashTagAtSignRegExp = RegExp(
   "(?!\\n)(?:^|\\s)([#@]([$detectionContentLetters]+))",
+  multiLine: true,
+);
+
+final hashTagAtSignUrlRegExp = RegExp(
+  "(?!\\n)(?:^|\\s)([#@]([$detectionContentLetters]+))|$urlRegexContent",
   multiLine: true,
 );
