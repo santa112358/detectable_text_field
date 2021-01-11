@@ -1,6 +1,6 @@
 name: detectable_text_field
 description: Text widgets with detection feature. You can detect hashtags, at sign, url or anything you want. Refinement of hashtagable
-version: 0.3.0
+version: 1.0.0
 author: Santa Takahashi
 homepage: https://github.com/santa112358/detectable_text_field
 

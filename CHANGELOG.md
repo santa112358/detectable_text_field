@@ -1,3 +1,7 @@
+## [1.0.0] - fix readme to show the update of v0.3.0
+
+## [0.3.0] - add sample regular expression of url detection
+
 ## [0.2.0] - add `onDetectionTyped`
 
 ## [0.1.0] - initial release
