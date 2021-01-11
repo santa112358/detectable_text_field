@@ -55,12 +55,13 @@ The argument `onTap(String)` is called when user tapped a detected text.
 
 You can add some actions in this callback with the tapped text.
 
-### detectionRegExp()
+### `detectionRegExp()``
 
 The widgets and methods in this package is expected to be used with RegExp. The function `detectionRegExp()` returns sample regExp depending om the boolean arguments: `hashtag`, `atSign`, and `url`.
-They are all `true` by default. If you do **NOT** want to detect atSign, you need to set the argument like this: `detectionRegExp(atSign:false)`. It is same for other arguments.
+They are all `true` by default.
+If you do **NOT** want to detect atSign, you need to set the argument like this: `detectionRegExp(atSign:false)`. It is same for other arguments.
 
-If you see the [API reference](https://pub.dev/documentation/detectable_text_field/latest/detector_sample_regular_expressions/detectionRegExp.html), you will see the function just returns the sample regular expressions below. You can use these regExp directly if you want.
+If you see the [API reference](https://pub.dev/documentation/detectable_text_field/latest/detector_sample_regular_expressions/detectionRegExp.html), you will see the function just returns the sample regular expressions below. You can use them directly if you want.
 
 | sample regExp | hashtag | atSign | url |
 | --- | --- | --- | ---- |
