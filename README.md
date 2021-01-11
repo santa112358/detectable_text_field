@@ -6,7 +6,7 @@ Text widgets with detection feature. You can detect hashtags, at sign, url, or a
 
 Refinement of [hashtagable](https://pub.dev/packages/hashtagable).
 
-![final](https://user-images.githubusercontent.com/43510799/104180581-b4a8a480-5450-11eb-9309-65ce3f2e979c.gif)
+![final](https://user-images.githubusercontent.com/43510799/104180838-2385fd80-5451-11eb-8506-1640b4ea829f.gif)
 
 ## Usage
 
