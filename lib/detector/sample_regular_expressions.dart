@@ -72,7 +72,11 @@ final atSignUrlRegExp = RegExp(
   multiLine: true,
 );
 
-RegExp detectionRegExp({hashtag = true, atSign = true, url = true}) {
+RegExp detectionRegExp({
+  bool hashtag = true,
+  bool atSign = true,
+  bool url = true,
+}) {
   if (hashtag == true && atSign == true && url == true) {
     return hashTagAtSignUrlRegExp;
   }

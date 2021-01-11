@@ -57,24 +57,30 @@ You can add some actions in this callback with the tapped text.
 
 ### detectionRegExp()
 
-The widgets and methods in this package is expected to be used with RegExp. You can pick regExp from examples set in the package.
+The widgets and methods in this package is expected to be used with RegExp. The function `detectionRegExp()` returns sample regExp depending om the boolean arguments: `hashtag`, `atSign`, and `url`.
+They are all `true` by default. If you do **NOT** want to detect atSign, you need to set the argument like this: `detectionRegExp(atSign:false)`. It is same for other arguments.
 
-| sample regExp | detection target |
-| --- | --- |
-| `hashTagRegExp` | Words start with hashtag |
-| `atSignRegExp`| Words start with at sign |
-| `hashTagAtSignRegExp`| Words start with hashtag or at sign |
+If you see the [API reference], you will see the function just returns the sample regular expressions below. You can use these regExp directly if you want.
+
+| sample regExp | hashtag | atSign | url |
+| --- | --- | --- | ---- |
+| `hashTagRegExp` |○|×|×|
+| `atSignRegExp`|×|○|×|
+| `urlRegExp`|×|×|○|
+| `hashTagAtSignRegExp`|○|○|×|
+| `hashTagUrlRegExp`|○|×|○|
+| `AtSignUrlRegExp`|×|○|○|
+| `hashTagAtSignUrlRegExp`|○|○|○|
+
 
 - The detection rules are almost same as twitter.
    1. It needs space before `#` or `@`.
-   2. It stops detection if there's emoji or symbol.
+   2. It stops `#` and `@` detection if there's emoji or symbol.
 
 
 <img src ="https://user-images.githubusercontent.com/43510799/93002102-3655f780-f56f-11ea-8193-1753a69e23bc.jpg" width = "265"/>
 
 - The examples currently support six languages: English, Japanese, Korean, Spanish, Arabic, and Thai.
-
-- The sample for url detection is planned to be added.
 
 ### Customize with useful functions
 
