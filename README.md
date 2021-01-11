@@ -55,7 +55,7 @@ The argument `onTap(String)` is called when user tapped a detected text.
 
 You can add some actions in this callback with the tapped text.
 
-### `detectionRegExp()
+### `detectionRegExp()`
 
 The widgets and methods in this package is expected to be used with RegExp.
 
