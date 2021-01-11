@@ -57,7 +57,46 @@ final hashTagAtSignRegExp = RegExp(
   multiLine: true,
 );
 
+final hashTagUrlRegExp = RegExp(
+  "(?!\\n)(?:^|\\s)([#]([$detectionContentLetters]+))|$urlRegexContent",
+  multiLine: true,
+);
+
 final hashTagAtSignUrlRegExp = RegExp(
   "(?!\\n)(?:^|\\s)([#@]([$detectionContentLetters]+))|$urlRegexContent",
   multiLine: true,
 );
+
+final atSignUrlRegExp = RegExp(
+  "(?!\\n)(?:^|\\s)([@]([$detectionContentLetters]+))|$urlRegexContent",
+  multiLine: true,
+);
+
+RegExp detectionRegExp({hashtag = true, atSign = true, url = true}) {
+  if (hashtag == true && atSign == true && url == true) {
+    return hashTagAtSignUrlRegExp;
+  }
+  if (hashtag == true) {
+    if (atSign == true) {
+      return hashTagAtSignRegExp;
+    }
+    if (url == true) {
+      return hashTagUrlRegExp;
+    }
+    return hashTagRegExp;
+  }
+
+  if (atSign == true) {
+    if (url == true) {
+      return atSignUrlRegExp;
+    }
+    return atSignRegExp;
+  }
+
+  if (url == true) {
+    return urlRegex;
+  }
+  assert(false,
+      "Unexpected condition: hashtag:$hashtag, atSign:$atSign, url:$url");
+  return null;
+}

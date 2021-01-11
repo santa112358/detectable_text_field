@@ -49,9 +49,7 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(height: 32),
               DetectableTextField(
                 maxLines: null,
-                controller: TextEditingController(
-                    text: "https://github.com/santa112358/"),
-                detectionRegExp: hashTagAtSignUrlRegExp,
+                detectionRegExp: detectionRegExp(),
                 onDetectionTyped: (text) {
                   print(text);
                 },

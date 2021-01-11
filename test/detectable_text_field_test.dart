@@ -3,7 +3,7 @@ import 'package:detectable_text_field/functions.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final urlRegex = "((http|https)://)(www.)?" +
+  final _urlRegex = "((http|https)://)(www.)?" +
       "[a-zA-Z0-9@:%._\\+~#?&//=]" +
       "{2,256}\\.[a-z]" +
       "{2,6}\\b([-a-zA-Z0-9@:%" +
@@ -12,7 +12,7 @@ void main() {
     "url detection test",
     () {
       final regex = RegExp(
-        urlRegex,
+        _urlRegex,
         caseSensitive: false,
         dotAll: true,
       );
@@ -26,13 +26,24 @@ void main() {
     "url detection test with hashtags",
     () {
       final regex = RegExp(
-        '(?!\\n)(?:^|\\s)([#@]([$detectionContentLetters]+))|$urlRegex',
+        '(?!\\n)(?:^|\\s)([#@]([$detectionContentLetters]+))|$_urlRegex',
       );
       final source =
           "Stop dhttp://foo.com/blah_blah oio#firebase notDetectThis @hello noDetection";
       final matches = extractDetections(source, regex);
       print(matches);
       expect(regex.hasMatch(source), true);
+    },
+  );
+  test(
+    "detectionRegExp must return proper regExp",
+    () {
+      expect(detectionRegExp(), hashTagAtSignUrlRegExp);
+      expect(detectionRegExp(hashtag: false), atSignUrlRegExp);
+      expect(detectionRegExp(hashtag: false, atSign: false), urlRegex);
+      expect(detectionRegExp(atSign: false), hashTagUrlRegExp);
+      expect(detectionRegExp(atSign: false, url: false), hashTagRegExp);
+      expect(detectionRegExp(url: false), hashTagAtSignRegExp);
     },
   );
 }

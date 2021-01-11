@@ -2,7 +2,7 @@
 
 [![pub package](https://img.shields.io/pub/v/detectable_text_field.svg)](https://pub.dev/packages/detectable_text_field) <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="License: MIT"></a>
 
-Text widgets with detection feature. You can detect hashtags, at sign, or anything you want.
+Text widgets with detection feature. You can detect hashtags, at sign, url, or anything you want.
 
 Refinement of [hashtagable](https://pub.dev/packages/hashtagable).
 
@@ -14,7 +14,7 @@ Refinement of [hashtagable](https://pub.dev/packages/hashtagable).
 
 ```dart
     DetectableTextField(
-      detectionRegExp: hashTagRegExp,
+      detectionRegExp: detectionRegExp(),
       detectedStyle: TextStyle(
         fontSize: 20,
         color: Colors.blue,
@@ -34,8 +34,8 @@ If you want to use detection feature in the text only to display, `DetectableTex
 
 ```dart
     DetectableText(
-      text: "#HashTag and @AtSign",
-      detectionRegExp: hashTagAtSignRegExp,
+      text: "#HashTag and @AtSign and https://pub.dev/packages/detectable_text_field",
+      detectionRegExp: detectionRegExp(),
       detectedStyle: TextStyle(
         fontSize: 20,
         color: Colors.blue,
@@ -55,7 +55,7 @@ The argument `onTap(String)` is called when user tapped a detected text.
 
 You can add some actions in this callback with the tapped text.
 
-### Sample RegExp
+### detectionRegExp()
 
 The widgets and methods in this package is expected to be used with RegExp. You can pick regExp from examples set in the package.
 
@@ -84,7 +84,7 @@ The widgets and methods in this package is expected to be used with RegExp. You 
    print(isDetected("Hello #World", hashTagRegExp));
    // true
 
-   print(isDetected("Hello World", hasgTagRegExp));
+   print(isDetected("Hello World", hashTagRegExp));
    // false
 
 ```
