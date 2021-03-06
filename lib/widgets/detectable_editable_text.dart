@@ -71,6 +71,7 @@ class DetectableEditableText extends EditableText {
     bool rendererIgnoresPointer = true,
     Color backgroundCursorColor = CupertinoColors.inactiveGray,
     bool enableInteractiveSelection = true,
+    Color autocorrectionTextRectColor,
   }) : super(
           key: key,
           focusNode: (focusNode) ?? FocusNode(),
@@ -122,6 +123,7 @@ class DetectableEditableText extends EditableText {
           showSelectionHandles: showSelectionHandles,
           rendererIgnoresPointer: rendererIgnoresPointer,
           enableInteractiveSelection: enableInteractiveSelection,
+          autocorrectionTextRectColor: autocorrectionTextRectColor,
         );
 
   final TextStyle detectedStyle;
