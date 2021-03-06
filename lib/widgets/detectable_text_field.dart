@@ -854,6 +854,11 @@ class _DetectableTextFieldState extends State<DetectableTextField>
     }
   }
 
+  Color _defaultSelectionColor(BuildContext context, Color primary) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    return primary.withOpacity(isDark ? 0.40 : 0.12);
+  }
+
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
@@ -881,6 +886,8 @@ class _DetectableTextFieldState extends State<DetectableTextField>
         widget.inputFormatters ?? <TextInputFormatter>[];
     if (widget.maxLength != null && widget.maxLengthEnforced)
       formatters.add(LengthLimitingTextInputFormatter(widget.maxLength));
+    final TextSelectionThemeData selectionTheme =
+        TextSelectionTheme.of(context);
 
     TextSelectionControls textSelectionControls;
     bool paintCursorAboveText;
@@ -936,6 +943,9 @@ class _DetectableTextFieldState extends State<DetectableTextField>
         autofocus: widget.autofocus,
         obscureText: widget.obscureText,
         autocorrect: widget.autocorrect,
+        autocorrectionTextRectColor: selectionTheme.selectionColor ??
+            _defaultSelectionColor(
+                context, CupertinoTheme.of(context).primaryColor),
         smartDashesType: widget.smartDashesType,
         smartQuotesType: widget.smartQuotesType,
         enableSuggestions: widget.enableSuggestions,
