@@ -165,12 +165,12 @@ class DetectableEditableTextState extends EditableTextState {
 
   @override
   void initState() {
+    super.initState();
     detector = Detector(
       textStyle: widget.style,
       detectedStyle: widget.detectedStyle,
       detectionRegExp: widget.detectionRegExp,
     );
-    super.initState();
   }
 
   @override

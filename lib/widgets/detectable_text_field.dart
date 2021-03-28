@@ -326,18 +326,17 @@ class DetectableTextField extends StatefulWidget {
   ///    characters" and how it may differ from the intuitive meaning.
   const DetectableTextField({
     Key? key,
-    this.controller,
     required this.detectionRegExp,
     this.decoratedStyle,
     this.onDetectionFinished,
     this.onDetectionTyped,
-    this.decorateAtSign = false,
+    this.basicStyle,
+    this.controller,
     this.focusNode,
     this.decoration = const InputDecoration(),
     TextInputType? keyboardType,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
-    this.basicStyle,
     this.strutStyle,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
@@ -437,9 +436,6 @@ class DetectableTextField extends StatefulWidget {
 
   /// TextStyle of hashTag
   final TextStyle? decoratedStyle;
-
-  /// Decides if text with at sign(@) decorated
-  final bool decorateAtSign;
 
   final RegExp detectionRegExp;
 

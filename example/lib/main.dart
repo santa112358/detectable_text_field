@@ -53,6 +53,9 @@ class MyHomePage extends StatelessWidget {
                 onDetectionTyped: (text) {
                   print(text);
                 },
+                onDetectionFinished: () {
+                  print('finished');
+                },
               ),
             ],
           ),
