@@ -1,30 +1,33 @@
-import 'package:detectable_text_field/detector/detector.dart' as detector;
+import 'package:detectable_text_field/detector/detector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-/// Add composing to detected text.
+/// Add composing to hashtag decorated text.
+///
+/// Expected to be used when Japanese letters are typed.
 class Composer {
   Composer({
-    @required this.detections,
-    @required this.composing,
-    @required this.sourceText,
-    @required this.onDetectionTyped,
-    @required this.selection,
-    @required this.detectedStyle,
+    required this.sourceText,
+    required this.detections,
+    required this.composing,
+    required this.selection,
+    required this.detectedStyle,
+    required this.onDetectionTyped,
   });
 
-  final List<detector.Detection> detections;
-  final TextRange composing;
   final String sourceText;
-  final ValueChanged<String> onDetectionTyped;
+  final List<Detection?> detections;
+  final TextRange composing;
   final int selection;
   final TextStyle detectedStyle;
+  final ValueChanged<String>? onDetectionTyped;
+
   // TODO(Takahashi): Add test code for composing
   TextSpan getComposedTextSpan() {
     final span = detections.map(
       (item) {
-        final spanRange = item.range;
-        final spanStyle = item.style;
+        final spanRange = item!.range;
+        final spanStyle = item.style!;
         final underlinedStyle =
             spanStyle.copyWith(decoration: TextDecoration.underline);
         if (spanRange.start <= composing.start &&
@@ -82,18 +85,24 @@ class Composer {
     return TextSpan(children: span);
   }
 
-  void callOnDetectionTyped() {
-    final typingDecoration = detections.firstWhere(
-      (decoration) =>
-          decoration.style == detectedStyle &&
-          decoration.range.start <= selection &&
-          decoration.range.end >= selection,
-      orElse: () {
-        return null;
-      },
+  Detection? typingDetection() {
+    final res = detections.where(
+      (detection) =>
+          detection!.style == detectedStyle &&
+          detection.range.start <= selection &&
+          detection.range.end >= selection,
     );
-    if (typingDecoration != null) {
-      onDetectionTyped(typingDecoration.range.textInside(sourceText));
+    if (res.isNotEmpty) {
+      return res.first;
+    } else {
+      return null;
+    }
+  }
+
+  void callOnDetectionTyped() {
+    final typingRange = typingDetection()?.range;
+    if (typingRange != null) {
+      onDetectionTyped!(typingRange.textInside(sourceText));
     }
   }
 }

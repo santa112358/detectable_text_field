@@ -28,7 +28,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = Theme.of(context).textTheme.bodyText1;
     return Scaffold(
       appBar: AppBar(
         title: Text("Detectable text field sample"),
@@ -53,6 +52,9 @@ class MyHomePage extends StatelessWidget {
                 detectionRegExp: detectionRegExp(),
                 onDetectionTyped: (text) {
                   print(text);
+                },
+                onDetectionFinished: () {
+                  print('finished');
                 },
               ),
             ],

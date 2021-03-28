@@ -8,8 +8,8 @@ import '../functions.dart';
 /// [onTap] is called when a tagged text is tapped.
 class DetectableText extends StatelessWidget {
   DetectableText({
-    @required this.text,
-    @required this.detectionRegExp,
+    required this.text,
+    required this.detectionRegExp,
     this.basicStyle,
     this.detectedStyle,
     this.onTap,
@@ -23,29 +23,28 @@ class DetectableText extends StatelessWidget {
     this.strutStyle,
     this.textWidthBasis = TextWidthBasis.parent,
     this.textHeightBehavior,
-  })  : assert(text != null),
-        assert(detectionRegExp != null);
+  });
 
   final String text;
-  final TextStyle basicStyle;
-  final TextStyle detectedStyle;
-  final Function(String) onTap;
+  final TextStyle? basicStyle;
+  final TextStyle? detectedStyle;
+  final Function(String)? onTap;
   final TextAlign textAlign;
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
   final bool softWrap;
   final TextOverflow overflow;
   final double textScaleFactor;
-  final int maxLines;
-  final Locale locale;
-  final StrutStyle strutStyle;
+  final int? maxLines;
+  final Locale? locale;
+  final StrutStyle? strutStyle;
   final TextWidthBasis textWidthBasis;
-  final TextHeightBehavior textHeightBehavior;
+  final TextHeightBehavior? textHeightBehavior;
   final RegExp detectionRegExp;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final TextStyle style = theme.textTheme.subtitle1.merge(basicStyle);
+    final TextStyle style = theme.textTheme.subtitle1!.merge(basicStyle);
     final dStyle = detectedStyle ?? style.copyWith(color: Colors.blue);
     return RichText(
       text: getDetectedTextSpan(
