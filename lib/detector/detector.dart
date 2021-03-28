@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 
 /// DataModel to explain the unit of word in decoration system
 class Detection extends Comparable<Detection> {
-  Detection({@required this.range, this.style, this.emojiStartPoint});
+  Detection({required this.range, this.style, this.emojiStartPoint});
 
   final TextRange range;
-  final TextStyle style;
-  final int emojiStartPoint;
+  final TextStyle? style;
+  final int? emojiStartPoint;
 
   @override
   int compareTo(Detection other) {
@@ -23,15 +23,15 @@ class Detector {
   final RegExp detectionRegExp;
 
   Detector({
-    @required this.textStyle,
-    @required this.detectedStyle,
-    @required this.detectionRegExp,
+    required this.textStyle,
+    required this.detectedStyle,
+    required this.detectionRegExp,
   });
 
   List<Detection> _getSourceDetections(
       List<RegExpMatch> tags, String copiedText) {
-    TextRange previousItem;
-    final result = List<Detection>();
+    TextRange? previousItem;
+    final result = <Detection>[];
     for (var tag in tags) {
       ///Add undetected content
       if (previousItem == null) {
@@ -64,13 +64,13 @@ class Detector {
 
   ///filter out the ones includes emoji.
   List<Detection> _getEmojiFilteredDetections(
-      {List<Detection> source,
-      String copiedText,
-      List<RegExpMatch> emojiMatches}) {
-    final result = List<Detection>();
+      {required List<Detection> source,
+      String? copiedText,
+      List<RegExpMatch>? emojiMatches}) {
+    final result = <Detection>[];
     for (var item in source) {
-      int emojiStartPoint;
-      for (var emojiMatch in emojiMatches) {
+      int? emojiStartPoint;
+      for (var emojiMatch in emojiMatches!) {
         final decorationContainsEmoji = (item.range.start < emojiMatch.start &&
             emojiMatch.end <= item.range.end);
         if (decorationContainsEmoji) {
@@ -114,7 +114,7 @@ class Detector {
 
     /// This is to avoid the error caused by 'regExp' which counts the emoji's length 1.
     emojiMatches.forEach((emojiMatch) {
-      final emojiLength = emojiMatch.group(0).length;
+      final emojiLength = emojiMatch.group(0)!.length;
       final replacementText = "a" * emojiLength;
       copiedText = copiedText.replaceRange(
           emojiMatch.start, emojiMatch.end, replacementText);

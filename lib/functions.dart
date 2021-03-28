@@ -15,7 +15,7 @@ bool isDetected(String value, RegExp detectionRegExp) {
   );
   final result = detector.getDetections(value);
   final detections = result
-      .where((detection) => detection.style.color == decoratedTextColor)
+      .where((detection) => detection.style!.color == decoratedTextColor)
       .toList();
   return detections.isNotEmpty;
 }
@@ -30,7 +30,7 @@ List<String> extractDetections(String value, RegExp detectionRegExp) {
   );
   final decorations = decorator.getDetections(value);
   final taggedDecorations = decorations
-      .where((decoration) => decoration.style.color == decoratedTextColor)
+      .where((decoration) => decoration.style!.color == decoratedTextColor)
       .toList();
   final result = taggedDecorations.map((decoration) {
     final text = decoration.range.textInside(value);
@@ -43,11 +43,11 @@ List<String> extractDetections(String value, RegExp detectionRegExp) {
 ///
 /// Used in [DetectableText]
 TextSpan getDetectedTextSpan({
-  @required TextStyle decoratedStyle,
-  @required TextStyle basicStyle,
-  @required String source,
-  @required RegExp detectionRegExp,
-  Function(String) onTap,
+  required TextStyle decoratedStyle,
+  required TextStyle basicStyle,
+  required String source,
+  required RegExp detectionRegExp,
+  Function(String)? onTap,
   bool decorateAtSign = false,
 }) {
   final detections = Detector(
@@ -67,7 +67,7 @@ TextSpan getDetectedTextSpan({
               ..onTap = () {
                 final decoration = detections[index];
                 if (decoration.style == decoratedStyle) {
-                  onTap(decoration.range.textInside(source).trim());
+                  onTap!(decoration.range.textInside(source).trim());
                 }
               };
             return MapEntry(

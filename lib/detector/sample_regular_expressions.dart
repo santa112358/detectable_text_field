@@ -72,7 +72,7 @@ final atSignUrlRegExp = RegExp(
   multiLine: true,
 );
 
-RegExp detectionRegExp({
+RegExp? detectionRegExp({
   bool hashtag = true,
   bool atSign = true,
   bool url = true,

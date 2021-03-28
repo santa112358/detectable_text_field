@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 /// Show detected text while user is inputting text.
@@ -13,20 +14,21 @@ import 'package:flutter/services.dart';
 /// EditableText which detects the text with [detectionRegExp]
 class DetectableEditableText extends EditableText {
   DetectableEditableText({
-    Key key,
-    FocusNode focusNode,
-    @required TextEditingController controller,
-    @required TextStyle basicStyle,
-    @required this.detectedStyle,
-    @required this.detectionRegExp,
-    @required Color cursorColor,
-    @required this.onDetectionTyped,
-    ValueChanged<String> onChanged,
-    ValueChanged<String> onSubmitted,
-    int maxLines,
-    int minLines,
-    TextInputType keyboardType,
-    bool autofocus,
+    Key? key,
+    FocusNode? focusNode,
+    required TextEditingController controller,
+    required TextStyle basicStyle,
+    required this.detectedStyle,
+    required this.detectionRegExp,
+    required Color cursorColor,
+    required this.onDetectionTyped,
+    required this.onDetectionFinished,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onSubmitted,
+    int? maxLines,
+    int? minLines,
+    TextInputType? keyboardType,
+    bool? autofocus,
     bool obscureText = false,
     bool readOnly = false,
     bool forceLine = true,
@@ -37,41 +39,47 @@ class DetectableEditableText extends EditableText {
       selectAll: true,
     ),
     bool autocorrect = true,
-    SmartDashesType smartDashesType,
-    SmartQuotesType smartQuotesType,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
     bool enableSuggestions = true,
-    StrutStyle strutStyle,
+    StrutStyle? strutStyle,
     TextAlign textAlign = TextAlign.start,
-    TextDirection textDirection,
+    TextDirection? textDirection,
     TextCapitalization textCapitalization = TextCapitalization.none,
-    Locale locale,
-    double textScaleFactor,
+    Locale? locale,
+    double? textScaleFactor,
     bool expands = false,
-    Color selectionColor,
-    TextSelectionControls selectionControls,
-    TextInputAction textInputAction,
-    VoidCallback onEditingComplete,
-    SelectionChangedCallback onSelectionChanged,
-    VoidCallback onSelectionHandleTapped,
-    List<TextInputFormatter> inputFormatters,
+    Color? selectionColor,
+    TextSelectionControls? selectionControls,
+    TextInputAction? textInputAction,
+    VoidCallback? onEditingComplete,
+    SelectionChangedCallback? onSelectionChanged,
+    VoidCallback? onSelectionHandleTapped,
+    List<TextInputFormatter>? inputFormatters,
     double cursorWidth = 2.0,
-    Radius cursorRadius,
+    Radius? cursorRadius,
     bool cursorOpacityAnimates = false,
-    Offset cursorOffset,
+    Offset? cursorOffset,
     bool paintCursorAboveText = false,
     BoxHeightStyle selectionHeightStyle = BoxHeightStyle.tight,
     BoxWidthStyle selectionWidthStyle = BoxWidthStyle.tight,
     Brightness keyboardAppearance = Brightness.light,
     EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    ScrollController scrollController,
-    ScrollPhysics scrollPhysics,
-    bool showCursor,
+    ScrollController? scrollController,
+    ScrollPhysics? scrollPhysics,
+    bool? showCursor,
     bool showSelectionHandles = false,
     bool rendererIgnoresPointer = true,
     Color backgroundCursorColor = CupertinoColors.inactiveGray,
     bool enableInteractiveSelection = true,
-    Color autocorrectionTextRectColor,
+    Color? autocorrectionTextRectColor,
+    String obscuringCharacter = '•',
+    AppPrivateCommandCallback? onAppPrivateCommand,
+    MouseCursor? mouseCursor,
+    Iterable<String>? autofillHints,
+    String? restorationId,
+    double? cursorHeight,
   }) : super(
           key: key,
           focusNode: (focusNode) ?? FocusNode(),
@@ -89,10 +97,10 @@ class DetectableEditableText extends EditableText {
           readOnly: readOnly,
           forceLine: forceLine,
           toolbarOptions: toolbarOptions,
-          autocorrect: autocorrect ?? false,
+          autocorrect: autocorrect,
           smartDashesType: smartDashesType,
           smartQuotesType: smartQuotesType,
-          enableSuggestions: enableSuggestions ?? false,
+          enableSuggestions: enableSuggestions,
           strutStyle: strutStyle,
           textAlign: textAlign,
           textDirection: textDirection,
@@ -124,13 +132,21 @@ class DetectableEditableText extends EditableText {
           rendererIgnoresPointer: rendererIgnoresPointer,
           enableInteractiveSelection: enableInteractiveSelection,
           autocorrectionTextRectColor: autocorrectionTextRectColor,
+          obscuringCharacter: obscuringCharacter,
+          onAppPrivateCommand: onAppPrivateCommand,
+          mouseCursor: mouseCursor,
+          autofillHints: autofillHints,
+          restorationId: restorationId,
+          cursorHeight: cursorHeight,
         );
 
   final TextStyle detectedStyle;
 
   final RegExp detectionRegExp;
 
-  final ValueChanged<String> onDetectionTyped;
+  final ValueChanged<String>? onDetectionTyped;
+
+  final VoidCallback? onDetectionFinished;
 
   @override
   DetectableEditableTextState createState() => DetectableEditableTextState();
@@ -141,9 +157,11 @@ class DetectableEditableText extends EditableText {
 /// Return detected text by using functions in [Detector]
 class DetectableEditableTextState extends EditableTextState {
   @override
-  DetectableEditableText get widget => super.widget;
+  DetectableEditableText get widget => super.widget as DetectableEditableText;
 
-  Detector detector;
+  late Detector detector;
+
+  Detection? prevTypingDetection;
 
   @override
   void initState() {
@@ -157,8 +175,22 @@ class DetectableEditableTextState extends EditableTextState {
 
   @override
   TextSpan buildTextSpan() {
-    final String sourceText = textEditingValue.text;
-    final detections = detector.getDetections(sourceText);
+    final detections = detector.getDetections(textEditingValue.text);
+    final composer = Composer(
+      selection: textEditingValue.selection.start,
+      onDetectionTyped: widget.onDetectionTyped,
+      sourceText: textEditingValue.text,
+      detectedStyle: widget.detectedStyle,
+      detections: detections,
+      composing: textEditingValue.composing,
+    );
+
+    final typingDetection = composer.typingDetection();
+    if (prevTypingDetection != null && typingDetection == null) {
+      widget.onDetectionFinished?.call();
+    }
+
+    prevTypingDetection = typingDetection;
     if (detections.isEmpty) {
       /// use same method as default textField to show composing underline
       return widget.controller.buildTextSpan(
@@ -168,15 +200,6 @@ class DetectableEditableTextState extends EditableTextState {
     } else {
       /// use [Composer] to show composing underline
       detections.sort();
-      final composing = textEditingValue.composing;
-      final composer = Composer(
-        selection: textEditingValue?.selection?.start ?? -1,
-        onDetectionTyped: widget.onDetectionTyped,
-        sourceText: sourceText,
-        detections: detections,
-        composing: composing,
-        detectedStyle: widget.detectedStyle,
-      );
       if (widget.onDetectionTyped != null) {
         composer.callOnDetectionTyped();
       }

@@ -5,8 +5,7 @@ author: Santa Takahashi
 homepage: https://github.com/santa112358/detectable_text_field
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
