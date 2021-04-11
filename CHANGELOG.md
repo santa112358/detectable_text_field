@@ -1,3 +1,5 @@
+## [2.0.1] - fix error occurred in onDetectionFinished and onDetectionTyped.
+
 ## [2.0.0] - support null safety
 
 ## [1.0.1] - fix the bug when auto correct suggestion appeared.
