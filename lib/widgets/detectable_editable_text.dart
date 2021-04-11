@@ -171,10 +171,12 @@ class DetectableEditableTextState extends EditableTextState {
       detectedStyle: widget.detectedStyle,
       detectionRegExp: widget.detectionRegExp,
     );
+    widget.controller.addListener(() {
+      _onValueUpdated.call();
+    });
   }
 
-  @override
-  TextSpan buildTextSpan() {
+  void _onValueUpdated() {
     final detections = detector.getDetections(textEditingValue.text);
     final composer = Composer(
       selection: textEditingValue.selection.start,
@@ -189,21 +191,35 @@ class DetectableEditableTextState extends EditableTextState {
     if (prevTypingDetection != null && typingDetection == null) {
       widget.onDetectionFinished?.call();
     }
-
     prevTypingDetection = typingDetection;
+    if (detections.isNotEmpty) {
+      /// use [dComposer] to show composing underline
+      detections.sort();
+      if (widget.onDetectionTyped != null) {
+        composer.callOnDetectionTyped();
+      }
+    }
+  }
+
+  @override
+  TextSpan buildTextSpan() {
+    final detections = detector.getDetections(textEditingValue.text);
+    final composer = Composer(
+      selection: textEditingValue.selection.start,
+      onDetectionTyped: widget.onDetectionTyped,
+      sourceText: textEditingValue.text,
+      detectedStyle: widget.detectedStyle,
+      detections: detections,
+      composing: textEditingValue.composing,
+    );
+
     if (detections.isEmpty) {
       /// use same method as default textField to show composing underline
       return widget.controller.buildTextSpan(
         style: widget.style,
         withComposing: !widget.readOnly,
       );
-    } else {
-      /// use [Composer] to show composing underline
-      detections.sort();
-      if (widget.onDetectionTyped != null) {
-        composer.callOnDetectionTyped();
-      }
-      return composer.getComposedTextSpan();
     }
+    return composer.getComposedTextSpan();
   }
 }
