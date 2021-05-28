@@ -1,3 +1,5 @@
+## [2.0.2] - fix errors occurred on flutter 2.2.x
+
 ## [2.0.1] - fix error occurred in onDetectionFinished and onDetectionTyped.
 
 ## [2.0.0] - support null safety

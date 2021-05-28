@@ -42,7 +42,7 @@ class _TextFieldSelectionGestureDetectorBuilder
     extends TextSelectionGestureDetectorBuilder {
   _TextFieldSelectionGestureDetectorBuilder({
     required _DetectableTextFieldState state,
-  })   : _state = state,
+  })  : _state = state,
         super(delegate: state);
 
   final _DetectableTextFieldState _state;
@@ -1416,12 +1416,12 @@ class _DetectableTextFieldState extends State<DetectableTextField>
       ),
     );
 
-    if (kIsWeb) {
-      return Shortcuts(
-        shortcuts: scrollShortcutOverrides,
-        child: child,
-      );
-    }
+    // if (kIsWeb) {
+    //   return Shortcuts(
+    //     shortcuts: scrollShortcutOverrides,
+    //     child: child,
+    //   );
+    // }
     return child;
   }
 }
