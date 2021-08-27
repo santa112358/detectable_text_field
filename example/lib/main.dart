@@ -39,12 +39,52 @@ class MyHomePage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              // DetectableText(
+              //   text:
+              //       "Welcome to #Detectable @TextField this is sample text we are texting the feed text here. Welcome to #Detectable @TextField this is sample text we are texting the feed text here",
+              //   detectionRegExp: hashTagAtSignRegExp,
+              //   trimLines: 3,
+              //   colorClickableText: Colors.pink,
+              //   trimMode: TrimMode.Line,
+              //   trimCollapsedText: '...Expand',
+              //   trimExpandedText: ' Collapse ',
+              //   onTap: (tappedText) {
+              //     print(tappedText);
+              //   },
+              // ),
               DetectableText(
-                text: "Welcome to #Detectable @TextField",
-                detectionRegExp: hashTagAtSignRegExp,
-                onTap: (tappedText) {
+                trimLines: 1,
+                colorClickableText: Colors.pink,
+                trimMode: TrimMode.Line,
+                trimCollapsedText: 'more',
+                trimExpandedText: '...less',
+                text:
+                    "Welcome to #Detectable @TextField http://www.google.com this is sample text we are texting the feed text here. Welcome to #Detectable @TextField this is sample text we are texting the feed text here",
+                detectionRegExp: RegExp(
+                  "(?!\\n)(?:^|\\s)([#@]([$detectionContentLetters]+))|$urlRegexContent",
+                  multiLine: true,
+                ),
+                onTap: (tappedText) async {
                   print(tappedText);
+                  if (tappedText.startsWith('#')) {
+                    debugPrint('DetectableText >>>>>>> #');
+                  } else if (tappedText.startsWith('@')) {
+                    debugPrint('DetectableText >>>>>>> @');
+                  } else if (tappedText.startsWith('http')) {
+                    debugPrint('DetectableText >>>>>>> http');
+                  }
                 },
+                basicStyle: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey,
+                ),
+                detectedStyle: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.5,
+                  color: Colors.blueAccent,
+                ),
               ),
               const SizedBox(height: 32),
               DetectableTextField(

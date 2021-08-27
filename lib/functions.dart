@@ -86,3 +86,52 @@ TextSpan getDetectedTextSpan({
     return TextSpan(children: span);
   }
 }
+
+
+TextSpan getDetectedTextSpanWithExtraChild({
+  required TextStyle decoratedStyle,
+  required TextStyle basicStyle,
+  required String source,
+  required RegExp detectionRegExp,
+  Function(String)? onTap,
+  bool decorateAtSign = false,
+  List<InlineSpan>? children
+}) {
+  final detections = Detector(
+    detectedStyle: decoratedStyle,
+    textStyle: basicStyle,
+    detectionRegExp: detectionRegExp,
+  ).getDetections(source);
+  if (detections.isEmpty) {
+    return TextSpan(text: source, style: basicStyle);
+  } else {
+    detections.sort();
+    List<InlineSpan> span = detections
+        .asMap()
+        .map(
+          (index, item) {
+        final recognizer = TapGestureRecognizer()
+          ..onTap = () {
+            final decoration = detections[index];
+            if (decoration.style == decoratedStyle) {
+              onTap!(decoration.range.textInside(source).trim());
+            }
+          };
+        return MapEntry(
+          index,
+          TextSpan(
+            style: item.style,
+            text: item.range.textInside(source),
+            recognizer: (onTap == null) ? null : recognizer,
+          ),
+        );
+      },
+    )
+        .values
+        .toList();
+
+    span.addAll(children!);
+
+    return TextSpan(children: span);
+  }
+}
