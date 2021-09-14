@@ -64,6 +64,9 @@ class MyHomePage extends StatelessWidget {
                   "(?!\\n)(?:^|\\s)([#@]([$detectionContentLetters]+))|$urlRegexContent",
                   multiLine: true,
                 ),
+                callback: (bool readMore){
+                  debugPrint('Read more >>>>>>> $readMore');
+                },
                 onTap: (tappedText) async {
                   print(tappedText);
                   if (tappedText.startsWith('#')) {
