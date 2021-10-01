@@ -24,6 +24,7 @@ class DetectableText extends StatefulWidget {
     this.basicStyle,
     this.detectedStyle,
     this.onTap,
+    this.alwaysDetectTap = false,
     this.textAlign = TextAlign.start,
     this.textDirection,
     this.softWrap = true,
@@ -50,6 +51,7 @@ class DetectableText extends StatefulWidget {
   final TextStyle? basicStyle;
   final TextStyle? detectedStyle;
   final Function(String)? onTap;
+  final bool alwaysDetectTap;
   final TextAlign textAlign;
   final TextDirection? textDirection;
   final bool softWrap;
