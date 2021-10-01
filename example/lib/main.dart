@@ -39,19 +39,6 @@ class MyHomePage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // DetectableText(
-              //   text:
-              //       "Welcome to #Detectable @TextField this is sample text we are texting the feed text here. Welcome to #Detectable @TextField this is sample text we are texting the feed text here",
-              //   detectionRegExp: hashTagAtSignRegExp,
-              //   trimLines: 3,
-              //   colorClickableText: Colors.pink,
-              //   trimMode: TrimMode.Line,
-              //   trimCollapsedText: '...Expand',
-              //   trimExpandedText: ' Collapse ',
-              //   onTap: (tappedText) {
-              //     print(tappedText);
-              //   },
-              // ),
               DetectableText(
                 trimLines: 1,
                 colorClickableText: Colors.pink,
@@ -64,7 +51,7 @@ class MyHomePage extends StatelessWidget {
                   "(?!\\n)(?:^|\\s)([#@]([$detectionContentLetters]+))|$urlRegexContent",
                   multiLine: true,
                 ),
-                callback: (bool readMore){
+                callback: (bool readMore) {
                   debugPrint('Read more >>>>>>> $readMore');
                 },
                 onTap: (tappedText) async {
