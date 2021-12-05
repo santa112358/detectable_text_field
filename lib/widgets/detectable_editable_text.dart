@@ -24,6 +24,7 @@ class DetectableEditableText extends EditableText {
     required this.onDetectionTyped,
     required this.onDetectionFinished,
     required this.matchFirst,
+    required this.ignoring,
     ValueChanged<String>? onChanged,
     ValueChanged<String>? onSubmitted,
     int? maxLines,
@@ -149,7 +150,11 @@ class DetectableEditableText extends EditableText {
 
   final VoidCallback? onDetectionFinished;
 
+  ///Matches only the initial detection
   final bool matchFirst;
+
+  ///Ignores the detection
+  final bool ignoring;
 
   @override
   DetectableEditableTextState createState() => DetectableEditableTextState();
@@ -176,7 +181,9 @@ class DetectableEditableTextState extends EditableTextState {
       matchFirst: widget.matchFirst,
     );
     widget.controller.addListener(() {
-      _onValueUpdated.call();
+      if(!widget.ignoring){
+        _onValueUpdated.call();
+      }
     });
   }
 
