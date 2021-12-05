@@ -23,6 +23,7 @@ class DetectableEditableText extends EditableText {
     required Color cursorColor,
     required this.onDetectionTyped,
     required this.onDetectionFinished,
+    required this.matchFirst,
     ValueChanged<String>? onChanged,
     ValueChanged<String>? onSubmitted,
     int? maxLines,
@@ -148,6 +149,8 @@ class DetectableEditableText extends EditableText {
 
   final VoidCallback? onDetectionFinished;
 
+  final bool matchFirst;
+
   @override
   DetectableEditableTextState createState() => DetectableEditableTextState();
 }
@@ -170,6 +173,7 @@ class DetectableEditableTextState extends EditableTextState {
       textStyle: widget.style,
       detectedStyle: widget.detectedStyle,
       detectionRegExp: widget.detectionRegExp,
+      matchFirst: widget.matchFirst,
     );
     widget.controller.addListener(() {
       _onValueUpdated.call();

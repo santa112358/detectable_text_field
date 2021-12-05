@@ -21,11 +21,13 @@ class Detector {
   final TextStyle textStyle;
   final TextStyle detectedStyle;
   final RegExp detectionRegExp;
+  final bool matchFirst;
 
   Detector({
     required this.textStyle,
     required this.detectedStyle,
     required this.detectionRegExp,
+    this.matchFirst = false,
   });
 
   List<Detection> _getSourceDetections(
@@ -120,9 +122,14 @@ class Detector {
           emojiMatch.start, emojiMatch.end, replacementText);
     });
 
-    final tags = detectionRegExp.allMatches(copiedText).toList();
+    List<RegExpMatch> tags = detectionRegExp.allMatches(copiedText).toList();
     if (tags.isEmpty) {
       return [];
+    }
+
+    if(matchFirst){
+      //Reduce down to the first match
+      tags = [tags[0]];
     }
 
     final sourceDetections = _getSourceDetections(tags, copiedText);
