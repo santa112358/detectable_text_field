@@ -188,7 +188,7 @@ class DetectableEditableTextState extends EditableTextState {
   }
 
   void _onValueUpdated() {
-    final detections = detector.getDetections(textEditingValue.text);
+    final detections = detector.getDetections(textEditingValue.text, widget.ignoring);
     final composer = Composer(
       selection: textEditingValue.selection.start,
       onDetectionTyped: widget.onDetectionTyped,
@@ -214,7 +214,7 @@ class DetectableEditableTextState extends EditableTextState {
 
   @override
   TextSpan buildTextSpan() {
-    final detections = detector.getDetections(textEditingValue.text);
+    final detections = detector.getDetections(textEditingValue.text, widget.ignoring);
     final composer = Composer(
       selection: textEditingValue.selection.start,
       onDetectionTyped: widget.onDetectionTyped,
