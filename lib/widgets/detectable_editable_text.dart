@@ -23,6 +23,8 @@ class DetectableEditableText extends EditableText {
     required Color cursorColor,
     required this.onDetectionTyped,
     required this.onDetectionFinished,
+    required this.matchFirst,
+    required this.ignoring,
     ValueChanged<String>? onChanged,
     ValueChanged<String>? onSubmitted,
     int? maxLines,
@@ -148,6 +150,12 @@ class DetectableEditableText extends EditableText {
 
   final VoidCallback? onDetectionFinished;
 
+  ///Matches only the initial detection
+  final bool matchFirst;
+
+  ///Ignores the detection
+  final bool ignoring;
+
   @override
   DetectableEditableTextState createState() => DetectableEditableTextState();
 }
@@ -170,14 +178,17 @@ class DetectableEditableTextState extends EditableTextState {
       textStyle: widget.style,
       detectedStyle: widget.detectedStyle,
       detectionRegExp: widget.detectionRegExp,
+      matchFirst: widget.matchFirst,
     );
     widget.controller.addListener(() {
-      _onValueUpdated.call();
+      if(!widget.ignoring){
+        _onValueUpdated.call();
+      }
     });
   }
 
   void _onValueUpdated() {
-    final detections = detector.getDetections(textEditingValue.text);
+    final detections = detector.getDetections(textEditingValue.text, widget.ignoring);
     final composer = Composer(
       selection: textEditingValue.selection.start,
       onDetectionTyped: widget.onDetectionTyped,
@@ -203,7 +214,7 @@ class DetectableEditableTextState extends EditableTextState {
 
   @override
   TextSpan buildTextSpan() {
-    final detections = detector.getDetections(textEditingValue.text);
+    final detections = detector.getDetections(textEditingValue.text, widget.ignoring);
     final composer = Composer(
       selection: textEditingValue.selection.start,
       onDetectionTyped: widget.onDetectionTyped,

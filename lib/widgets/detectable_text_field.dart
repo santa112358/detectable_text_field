@@ -333,6 +333,8 @@ class DetectableTextField extends StatefulWidget {
     this.basicStyle,
     this.controller,
     this.focusNode,
+    this.matchFirst = false,
+    this.ignoreDetection = false,
     this.decoration = const InputDecoration(),
     TextInputType? keyboardType,
     this.textInputAction,
@@ -438,6 +440,10 @@ class DetectableTextField extends StatefulWidget {
   final TextStyle? decoratedStyle;
 
   final RegExp detectionRegExp;
+
+  final bool matchFirst;
+
+  final bool ignoreDetection;
 
   /// Controls the text being edited.
   ///
@@ -1280,6 +1286,8 @@ class _DetectableTextFieldState extends State<DetectableTextField>
         child: DetectableEditableText(
           key: editableTextKey,
           detectionRegExp: widget.detectionRegExp,
+          matchFirst: widget.matchFirst,
+          ignoring: widget.ignoreDetection,
           detectedStyle:
               widget.decoratedStyle ?? style.copyWith(color: Colors.blue),
           onDetectionFinished: widget.onDetectionFinished,
