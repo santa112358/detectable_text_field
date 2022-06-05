@@ -143,6 +143,7 @@ class _DetectableTextState extends State<DetectableText> {
           onTap: widget.onTap,
           source: widget.text,
           detectionRegExp: widget.detectionRegExp,
+          alwaysDetectTap: widget.alwaysDetectTap,
         );
 
         // Layout and measure link
@@ -205,6 +206,7 @@ class _DetectableTextState extends State<DetectableText> {
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
+                alwaysDetectTap: widget.alwaysDetectTap,
                 source: _readMore
                     ? widget.text.substring(0, widget.trimLength) +
                     (linkLongerThanLine ? _kLineSeparator : '')
@@ -218,6 +220,7 @@ class _DetectableTextState extends State<DetectableText> {
                 basicStyle: style,
                 onTap: widget.onTap,
                 source: widget.text,
+                alwaysDetectTap: widget.alwaysDetectTap,
                 detectionRegExp: widget.detectionRegExp,
               );
             }

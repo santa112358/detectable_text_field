@@ -95,6 +95,7 @@ TextSpan getDetectedTextSpanWithExtraChild(
     required RegExp detectionRegExp,
     Function(String)? onTap,
     bool decorateAtSign = false,
+      bool alwaysDetectTap = false,
     List<InlineSpan>? children}) {
   final detections = Detector(
     detectedStyle: decoratedStyle,
@@ -117,7 +118,7 @@ TextSpan getDetectedTextSpanWithExtraChild(
             final recognizer = TapGestureRecognizer()
               ..onTap = () {
                 final decoration = detections[index];
-                if (decoration.style == decoratedStyle) {
+                if (decoration.style == decoratedStyle || alwaysDetectTap) {
                   onTap!(decoration.range.textInside(source).trim());
                 }
               };
