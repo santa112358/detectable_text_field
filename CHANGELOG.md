@@ -1,6 +1,6 @@
 ## [2.0.4]
 - Added contributors list on readme.
-- 
+- Fix analysis problems
 
 ## [2.0.3] 
 - added read more function to DetectableText
