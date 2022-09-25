@@ -1,3 +1,7 @@
+## [2.0.4]
+- Added contributors list on readme.
+- 
+
 ## [2.0.3] 
 - added read more function to DetectableText
 - added method to detect all the text

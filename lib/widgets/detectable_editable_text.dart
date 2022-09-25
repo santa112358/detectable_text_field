@@ -3,10 +3,7 @@ import 'dart:ui';
 import 'package:detectable_text_field/composer/composer.dart';
 import 'package:detectable_text_field/detector/detector.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 /// Show detected text while user is inputting text.
