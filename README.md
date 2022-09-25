@@ -1,6 +1,6 @@
 # detectable_text_field
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![pub package](https://img.shields.io/pub/v/detectable_text_field.svg)](https://pub.dev/packages/detectable_text_field) <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="License: MIT"></a>
@@ -121,6 +121,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center"><a href="https://pub.dev/publishers/3tadev.work/packages"><img src="https://avatars.githubusercontent.com/u/43510799?v=4?s=100" width="100px;" alt="Santa Takahashi"/><br /><sub><b>Santa Takahashi</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=santa112358" title="Code">💻</a></td>
+      <td align="center"><a href="https://www.facebook.com/Paresh.07.OCT"><img src="https://avatars.githubusercontent.com/u/10085177?v=4?s=100" width="100px;" alt="Paresh Patil"/><br /><sub><b>Paresh Patil</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=Pareshoct7" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
