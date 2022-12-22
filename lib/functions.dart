@@ -47,7 +47,6 @@ TextSpan getDetectedTextSpan({
   required TextStyle basicStyle,
   required String source,
   required RegExp detectionRegExp,
-  bool alwaysDetectTap = false,
   Function(String)? onTap,
   bool decorateAtSign = false,
 }) {
@@ -64,13 +63,14 @@ TextSpan getDetectedTextSpan({
         .asMap()
         .map(
           (index, item) {
-            final recognizer = TapGestureRecognizer()
-              ..onTap = () {
-                final decoration = detections[index];
-                if (decoration.style == decoratedStyle || alwaysDetectTap) {
-                  onTap!(decoration.range.textInside(source).trim());
-                }
-              };
+            TapGestureRecognizer? recognizer;
+            final decoration = detections[index];
+            if (decoration.style == decoratedStyle && onTap != null) {
+              recognizer = TapGestureRecognizer()
+                ..onTap = () {
+                  onTap(decoration.range.textInside(source).trim());
+                };
+            }
             return MapEntry(
               index,
               TextSpan(
@@ -95,7 +95,6 @@ TextSpan getDetectedTextSpanWithExtraChild(
     required RegExp detectionRegExp,
     Function(String)? onTap,
     bool decorateAtSign = false,
-      bool alwaysDetectTap = false,
     List<InlineSpan>? children}) {
   final detections = Detector(
     detectedStyle: decoratedStyle,
@@ -115,13 +114,14 @@ TextSpan getDetectedTextSpanWithExtraChild(
         .asMap()
         .map(
           (index, item) {
-            final recognizer = TapGestureRecognizer()
-              ..onTap = () {
-                final decoration = detections[index];
-                if (decoration.style == decoratedStyle || alwaysDetectTap) {
-                  onTap!(decoration.range.textInside(source).trim());
-                }
-              };
+            TapGestureRecognizer? recognizer;
+            final decoration = detections[index];
+            if (decoration.style == decoratedStyle && onTap != null) {
+              recognizer = TapGestureRecognizer()
+                ..onTap = () {
+                  onTap(decoration.range.textInside(source).trim());
+                };
+            }
             return MapEntry(
               index,
               TextSpan(
