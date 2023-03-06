@@ -27,7 +27,7 @@ const detectionContentLetters = _symbols +
     _arabicLetters +
     _thaiLetters;
 
-const urlRegexContent = "((http|https)://)(www.)?" +
+const urlRegexContent = "((http|https)://)?(www.)?" +
     "[-a-zA-Z0-9@:%._\\+~#?&//=]" +
     "{2,256}\\.[a-z]" +
     "{2,6}\\b([-a-zA-Z0-9@:%" +
