@@ -81,7 +81,7 @@ class Composer {
         }
       },
     ).toList();
-    return TextSpan(children: span);
+    return TextSpan(children: span, style: detectedStyle);
   }
 
   Detection? typingDetection() {

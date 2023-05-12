@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../functions.dart';
 
-
 enum TrimMode {
   Length,
   Line,
@@ -16,14 +15,12 @@ const String _kLineSeparator = '\u2028';
 ///
 /// [onTap] is called when a tagged text is tapped.
 class DetectableText extends StatefulWidget {
-
   DetectableText({
     required this.text,
     required this.detectionRegExp,
     this.basicStyle,
     this.detectedStyle,
     this.onTap,
-    this.alwaysDetectTap = false,
     this.textAlign = TextAlign.start,
     this.textDirection,
     this.softWrap = true,
@@ -50,7 +47,6 @@ class DetectableText extends StatefulWidget {
   final TextStyle? basicStyle;
   final TextStyle? detectedStyle;
   final Function(String)? onTap;
-  final bool alwaysDetectTap;
   final TextAlign textAlign;
   final TextDirection? textDirection;
   final bool softWrap;
@@ -63,6 +59,7 @@ class DetectableText extends StatefulWidget {
   final TextHeightBehavior? textHeightBehavior;
   final RegExp detectionRegExp;
   final String delimiter;
+
   /// Used on TrimMode.Length
   final int trimLength;
 
@@ -123,8 +120,8 @@ class _DetectableTextState extends State<DetectableText> {
     TextSpan _delimiter = TextSpan(
       text: _readMore
           ? widget.trimCollapsedText.isNotEmpty
-          ? widget.delimiter
-          : ''
+              ? widget.delimiter
+              : ''
           : '',
       style: _defaultDelimiterStyle,
       recognizer: TapGestureRecognizer()..onTap = _onTapLink,
@@ -142,7 +139,6 @@ class _DetectableTextState extends State<DetectableText> {
           onTap: widget.onTap,
           source: widget.text,
           detectionRegExp: widget.detectionRegExp,
-          alwaysDetectTap: widget.alwaysDetectTap,
         );
 
         // Layout and measure link
@@ -201,25 +197,23 @@ class _DetectableTextState extends State<DetectableText> {
               //   children: <TextSpan>[_delimiter, link],
               // );
 
-              textSpan =  getDetectedTextSpanWithExtraChild(
+              textSpan = getDetectedTextSpanWithExtraChild(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
-                alwaysDetectTap: widget.alwaysDetectTap,
                 source: _readMore
                     ? widget.text.substring(0, widget.trimLength) +
-                    (linkLongerThanLine ? _kLineSeparator : '')
+                        (linkLongerThanLine ? _kLineSeparator : '')
                     : widget.text,
                 detectionRegExp: widget.detectionRegExp,
                 children: <TextSpan>[_delimiter, link],
               );
             } else {
-              textSpan =  getDetectedTextSpan(
+              textSpan = getDetectedTextSpan(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
                 source: widget.text,
-                alwaysDetectTap: widget.alwaysDetectTap,
                 detectionRegExp: widget.detectionRegExp,
               );
             }
@@ -235,19 +229,19 @@ class _DetectableTextState extends State<DetectableText> {
               //   children: <TextSpan>[_delimiter, link],
               // );
 
-              textSpan =  getDetectedTextSpanWithExtraChild(
+              textSpan = getDetectedTextSpanWithExtraChild(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
                 source: _readMore
                     ? widget.text.substring(0, endIndex) +
-                    (linkLongerThanLine ? _kLineSeparator : '')
+                        (linkLongerThanLine ? _kLineSeparator : '')
                     : widget.text,
                 detectionRegExp: widget.detectionRegExp,
                 children: <TextSpan>[_delimiter, link],
               );
             } else {
-              textSpan =  getDetectedTextSpan(
+              textSpan = getDetectedTextSpan(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
