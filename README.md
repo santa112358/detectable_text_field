@@ -1,6 +1,6 @@
 # detectable_text_field
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![pub package](https://img.shields.io/pub/v/detectable_text_field.svg)](https://pub.dev/packages/detectable_text_field) <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="License: MIT"></a>
@@ -120,11 +120,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href="https://pub.dev/publishers/3tadev.work/packages"><img src="https://avatars.githubusercontent.com/u/43510799?v=4?s=100" width="100px;" alt="Santa Takahashi"/><br /><sub><b>Santa Takahashi</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=santa112358" title="Code">💻</a></td>
-      <td align="center"><a href="https://www.facebook.com/Paresh.07.OCT"><img src="https://avatars.githubusercontent.com/u/10085177?v=4?s=100" width="100px;" alt="Paresh Patil"/><br /><sub><b>Paresh Patil</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=Pareshoct7" title="Code">💻</a></td>
-      <td align="center"><a href="https://github.com/jtmuller5"><img src="https://avatars.githubusercontent.com/u/47997351?v=4?s=100" width="100px;" alt="Joseph Muller"/><br /><sub><b>Joseph Muller</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=jtmuller5" title="Code">💻</a></td>
-      <td align="center"><a href="https://github.com/EsteveAguilera"><img src="https://avatars.githubusercontent.com/u/6932449?v=4?s=100" width="100px;" alt="Esteve Aguilera"/><br /><sub><b>Esteve Aguilera</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=EsteveAguilera" title="Code">💻</a></td>
-      <td align="center"><a href="https://github.com/MATTYGILO"><img src="https://avatars.githubusercontent.com/u/34808802?v=4?s=100" width="100px;" alt="MATTYGILO"/><br /><sub><b>MATTYGILO</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=MATTYGILO" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://pub.dev/publishers/3tadev.work/packages"><img src="https://avatars.githubusercontent.com/u/43510799?v=4?s=100" width="100px;" alt="Santa Takahashi"/><br /><sub><b>Santa Takahashi</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=santa112358" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.facebook.com/Paresh.07.OCT"><img src="https://avatars.githubusercontent.com/u/10085177?v=4?s=100" width="100px;" alt="Paresh Patil"/><br /><sub><b>Paresh Patil</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=Pareshoct7" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/jtmuller5"><img src="https://avatars.githubusercontent.com/u/47997351?v=4?s=100" width="100px;" alt="Joseph Muller"/><br /><sub><b>Joseph Muller</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=jtmuller5" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/EsteveAguilera"><img src="https://avatars.githubusercontent.com/u/6932449?v=4?s=100" width="100px;" alt="Esteve Aguilera"/><br /><sub><b>Esteve Aguilera</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=EsteveAguilera" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MATTYGILO"><img src="https://avatars.githubusercontent.com/u/34808802?v=4?s=100" width="100px;" alt="MATTYGILO"/><br /><sub><b>MATTYGILO</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=MATTYGILO" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://add00w.github.io"><img src="https://avatars.githubusercontent.com/u/35359329?v=4?s=100" width="100px;" alt="Abdullahi A. Addow"/><br /><sub><b>Abdullahi A. Addow</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=Add00w" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
