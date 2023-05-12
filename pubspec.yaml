@@ -1,6 +1,6 @@
 name: detectable_text_field
 description: TextField with detection features. You can detect hashtags, at sign, url or anything you want. Helps you develop Twitter like app. Refinement of hashtagable
-version: 2.0.4
+version: 2.1.0
 homepage: https://github.com/santa112358/detectable_text_field
 
 environment:
