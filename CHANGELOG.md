@@ -1,4 +1,4 @@
-## [2.0.4]
+## [2.1.0]
 - Supported flutter 3.10.0
 - Fixed the gestures of DetectableText
 - Fixed link detection
