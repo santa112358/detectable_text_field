@@ -38,6 +38,10 @@ class DetectableTextFormField extends FormField<String> {
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     bool readOnly = false,
+    @Deprecated(
+      'Use `contextMenuBuilder` instead. '
+      'This feature was deprecated after v3.3.0-0.5.pre.',
+    )
     ToolbarOptions? toolbarOptions,
     bool? showCursor,
     bool autofocus = false,
@@ -52,9 +56,10 @@ class DetectableTextFormField extends FormField<String> {
     bool expands = false,
     int? maxLength,
     @Deprecated(
-        'Use maxLengthEnforcement parameter which provides more specific '
-        'behavior related to the maxLength limit. '
-        'This feature was deprecated after v1.25.0-5.0.pre.')
+      'Use maxLengthEnforcement parameter which provides more specific '
+      'behavior related to the maxLength limit. '
+      'This feature was deprecated after v1.25.0-5.0.pre.',
+    )
     bool maxLengthEnforced = true,
     MaxLengthEnforcement? maxLengthEnforcement,
     ValueChanged<String>? onChanged,
@@ -108,9 +113,10 @@ class DetectableTextFormField extends FormField<String> {
           enabled: enabled ?? decoration?.enabled ?? true,
           autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
           builder: (FormFieldState<String> field) {
-
-            final _DetectableTextFormFieldState state = field as _DetectableTextFormFieldState;
-            final InputDecoration effectiveDecoration = (decoration ?? const InputDecoration())
+            final _DetectableTextFormFieldState state =
+                field as _DetectableTextFormFieldState;
+            final InputDecoration effectiveDecoration = (decoration ??
+                    const InputDecoration())
                 .applyDefaults(Theme.of(field.context).inputDecorationTheme);
 
             void onChangedHandler(String value) {
@@ -128,7 +134,8 @@ class DetectableTextFormField extends FormField<String> {
               onDetectionFinished: onDetectionFinished,
               onDetectionTyped: onDetectionTyped,
               focusNode: focusNode,
-              decoration: effectiveDecoration.copyWith(errorText: field.errorText),
+              decoration:
+                  effectiveDecoration.copyWith(errorText: field.errorText),
               keyboardType: keyboardType,
               textInputAction: textInputAction,
               textCapitalization: textCapitalization,
@@ -143,8 +150,14 @@ class DetectableTextFormField extends FormField<String> {
               obscuringCharacter: obscuringCharacter,
               obscureText: obscureText,
               autocorrect: autocorrect,
-              smartDashesType: smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-              smartQuotesType: smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+              smartDashesType: smartDashesType ??
+                  (obscureText
+                      ? SmartDashesType.disabled
+                      : SmartDashesType.enabled),
+              smartQuotesType: smartQuotesType ??
+                  (obscureText
+                      ? SmartQuotesType.disabled
+                      : SmartQuotesType.enabled),
               enableSuggestions: enableSuggestions,
               maxLines: maxLines,
               minLines: minLines,

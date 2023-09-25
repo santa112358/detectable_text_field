@@ -342,6 +342,10 @@ class DetectableTextField extends StatefulWidget {
     this.textAlignVertical,
     this.textDirection,
     this.readOnly = false,
+    @Deprecated(
+      'Use `contextMenuBuilder` instead. '
+      'This feature was deprecated after v3.3.0-0.5.pre.',
+    )
     ToolbarOptions? toolbarOptions,
     this.showCursor,
     this.autofocus = false,
@@ -356,9 +360,10 @@ class DetectableTextField extends StatefulWidget {
     this.expands = false,
     this.maxLength,
     @Deprecated(
-        'Use maxLengthEnforcement parameter which provides more specific '
-        'behavior related to the maxLength limit. '
-        'This feature was deprecated after v1.25.0-5.0.pre.')
+      'Use maxLengthEnforcement parameter which provides more specific '
+      'behavior related to the maxLength limit. '
+      'This feature was deprecated after v1.25.0-5.0.pre.',
+    )
     this.maxLengthEnforced = true,
     this.maxLengthEnforcement,
     this.onChanged,
@@ -385,6 +390,7 @@ class DetectableTextField extends StatefulWidget {
     this.scrollPhysics,
     this.autofillHints,
     this.restorationId,
+    this.contextMenuBuilder = _defaultContextMenuBuilder,
     this.spellCheckConfiguration,
   })  : smartDashesType = smartDashesType ??
             (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
@@ -563,6 +569,10 @@ class DetectableTextField extends StatefulWidget {
   /// If not set, select all and paste will default to be enabled. Copy and cut
   /// will be disabled if [obscureText] is true. If [readOnly] is true,
   /// paste and cut will be disabled regardless.
+  @Deprecated(
+    'Use `contextMenuBuilder` instead. '
+    'This feature was deprecated after v3.3.0-0.5.pre.',
+  )
   final ToolbarOptions toolbarOptions;
 
   /// {@macro flutter.widgets.editableText.showCursor}
@@ -809,6 +819,15 @@ class DetectableTextField extends StatefulWidget {
   /// {@endtemplate}
   final String? restorationId;
 
+  /// {@macro flutter.widgets.EditableText.contextMenuBuilder}
+  ///
+  /// If not provided, will build a default menu based on the platform.
+  ///
+  /// See also:
+  ///
+  ///  * [AdaptiveTextSelectionToolbar], which is built by default.
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
+
   /// {@template flutter.widgets.EditableText.spellCheckConfiguration}
   /// Configuration that details how spell check should be performed.
   ///
@@ -822,6 +841,13 @@ class DetectableTextField extends StatefulWidget {
   /// If this configuration is left null, then spell check is disabled by default.
   /// {@endtemplate}
   final SpellCheckConfiguration? spellCheckConfiguration;
+
+  static Widget _defaultContextMenuBuilder(
+      BuildContext context, EditableTextState editableTextState) {
+    return AdaptiveTextSelectionToolbar.editableText(
+      editableTextState: editableTextState,
+    );
+  }
 
   /// Default builder for [TextField]'s spell check suggestions toolbar.
   ///
@@ -1090,7 +1116,8 @@ class _DetectableTextFieldState extends State<DetectableTextField>
       return effectiveDecoration.copyWith(
         errorText: effectiveDecoration.errorText ?? '',
         counterStyle: effectiveDecoration.errorStyle ??
-            themeData.textTheme.caption!.copyWith(color: themeData.errorColor),
+            themeData.textTheme.bodySmall!
+                .copyWith(color: themeData.colorScheme.error),
         counterText: counterText,
         semanticCounterText: semanticCounterText,
       );
@@ -1263,7 +1290,7 @@ class _DetectableTextFieldState extends State<DetectableTextField>
     final ThemeData theme = Theme.of(context);
     final TextSelectionThemeData selectionTheme =
         TextSelectionTheme.of(context);
-    final TextStyle style = theme.textTheme.subtitle1!.merge(widget.basicStyle);
+    final TextStyle style = theme.textTheme.titleMedium!.merge(widget.basicStyle);
     final Brightness keyboardAppearance =
         widget.keyboardAppearance ?? theme.brightness;
     final TextEditingController controller = _effectiveController;
@@ -1429,6 +1456,7 @@ class _DetectableTextFieldState extends State<DetectableTextField>
           autofillHints: widget.autofillHints,
           autocorrectionTextRectColor: autocorrectionTextRectColor,
           restorationId: 'editable',
+          contextMenuBuilder: widget.contextMenuBuilder,
           spellCheckConfiguration: spellCheckConfiguration,
         ),
       ),

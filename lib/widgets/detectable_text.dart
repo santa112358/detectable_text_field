@@ -101,7 +101,7 @@ class _DetectableTextState extends State<DetectableText> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final TextStyle style = theme.textTheme.subtitle1!.merge(widget.basicStyle);
+    final TextStyle style = theme.textTheme.titleMedium!.merge(widget.basicStyle);
     final dStyle = widget.detectedStyle ?? style.copyWith(color: Colors.blue);
 
     final _defaultLessStyle = widget.lessStyle ?? style;

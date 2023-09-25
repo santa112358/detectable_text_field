@@ -29,6 +29,10 @@ class DetectableEditableText extends EditableText {
     bool obscureText = false,
     bool readOnly = false,
     bool forceLine = true,
+    @Deprecated(
+      'Use `contextMenuBuilder` instead. '
+      'This feature was deprecated after v3.3.0-0.5.pre.',
+    )
     ToolbarOptions toolbarOptions = const ToolbarOptions(
       copy: true,
       cut: true,
@@ -77,6 +81,7 @@ class DetectableEditableText extends EditableText {
     Iterable<String>? autofillHints,
     String? restorationId,
     double? cursorHeight,
+    EditableTextContextMenuBuilder? contextMenuBuilder,
     SpellCheckConfiguration? spellCheckConfiguration,
   }) : super(
           key: key,
@@ -136,6 +141,7 @@ class DetectableEditableText extends EditableText {
           autofillHints: autofillHints,
           restorationId: restorationId,
           cursorHeight: cursorHeight,
+          contextMenuBuilder: contextMenuBuilder,
           spellCheckConfiguration: spellCheckConfiguration,
         );
 
