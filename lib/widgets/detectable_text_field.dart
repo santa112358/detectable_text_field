@@ -359,7 +359,7 @@ class DetectableTextField extends StatefulWidget {
         'Use maxLengthEnforcement parameter which provides more specific '
         'behavior related to the maxLength limit. '
         'This feature was deprecated after v1.25.0-5.0.pre.')
-        this.maxLengthEnforced = true,
+    this.maxLengthEnforced = true,
     this.maxLengthEnforcement,
     this.onChanged,
     this.onEditingComplete,
@@ -385,6 +385,7 @@ class DetectableTextField extends StatefulWidget {
     this.scrollPhysics,
     this.autofillHints,
     this.restorationId,
+    this.spellCheckConfiguration,
   })  : smartDashesType = smartDashesType ??
             (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
         smartQuotesType = smartQuotesType ??
@@ -807,6 +808,20 @@ class DetectableTextField extends StatefulWidget {
   ///    Flutter.
   /// {@endtemplate}
   final String? restorationId;
+
+  /// {@template flutter.widgets.EditableText.spellCheckConfiguration}
+  /// Configuration that details how spell check should be performed.
+  ///
+  /// Specifies the [SpellCheckService] used to spell check text input and the
+  /// [TextStyle] used to style text with misspelled words.
+  ///
+  /// If the [SpellCheckService] is left null, spell check is disabled by
+  /// default unless the [DefaultSpellCheckService] is supported, in which case
+  /// it is used. It is currently supported only on Android and iOS.
+  ///
+  /// If this configuration is left null, then spell check is disabled by default.
+  /// {@endtemplate}
+  final SpellCheckConfiguration? spellCheckConfiguration;
 
   @override
   _DetectableTextFieldState createState() => _DetectableTextFieldState();
@@ -1337,6 +1352,7 @@ class _DetectableTextFieldState extends State<DetectableTextField>
           autofillHints: widget.autofillHints,
           autocorrectionTextRectColor: autocorrectionTextRectColor,
           restorationId: 'editable',
+          spellCheckConfiguration: widget.spellCheckConfiguration,
         ),
       ),
     );

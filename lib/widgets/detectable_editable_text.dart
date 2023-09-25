@@ -77,6 +77,7 @@ class DetectableEditableText extends EditableText {
     Iterable<String>? autofillHints,
     String? restorationId,
     double? cursorHeight,
+    SpellCheckConfiguration? spellCheckConfiguration,
   }) : super(
           key: key,
           focusNode: (focusNode) ?? FocusNode(),
@@ -135,6 +136,7 @@ class DetectableEditableText extends EditableText {
           autofillHints: autofillHints,
           restorationId: restorationId,
           cursorHeight: cursorHeight,
+          spellCheckConfiguration: spellCheckConfiguration,
         );
 
   final TextStyle detectedStyle;
