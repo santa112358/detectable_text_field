@@ -823,6 +823,58 @@ class DetectableTextField extends StatefulWidget {
   /// {@endtemplate}
   final SpellCheckConfiguration? spellCheckConfiguration;
 
+  /// Default builder for [TextField]'s spell check suggestions toolbar.
+  ///
+  /// On Apple platforms, builds an iOS-style toolbar. Everywhere else, builds
+  /// an Android-style toolbar.
+  ///
+  /// See also:
+  ///  * [spellCheckConfiguration], where this is typically specified for
+  ///    [TextField].
+  ///  * [SpellCheckConfiguration.spellCheckSuggestionsToolbarBuilder], the
+  ///    parameter for which this is the default value for [TextField].
+  ///  * [CupertinoTextField.defaultSpellCheckSuggestionsToolbarBuilder], which
+  ///    is like this but specifies the default for [CupertinoTextField].
+  @visibleForTesting
+  static Widget defaultSpellCheckSuggestionsToolbarBuilder(
+    BuildContext context,
+    EditableTextState editableTextState,
+  ) {
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return CupertinoSpellCheckSuggestionsToolbar.editableText(
+          editableTextState: editableTextState,
+        );
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return SpellCheckSuggestionsToolbar.editableText(
+          editableTextState: editableTextState,
+        );
+    }
+  }
+
+  /// Returns a new [SpellCheckConfiguration] where the given configuration has
+  /// had any missing values replaced with their defaults for the Android
+  /// platform.
+  static SpellCheckConfiguration inferAndroidSpellCheckConfiguration(
+    SpellCheckConfiguration? configuration,
+  ) {
+    if (configuration == null ||
+        configuration == const SpellCheckConfiguration.disabled()) {
+      return const SpellCheckConfiguration.disabled();
+    }
+    return configuration.copyWith(
+      misspelledTextStyle: configuration.misspelledTextStyle ??
+          TextField.materialMisspelledTextStyle,
+      spellCheckSuggestionsToolbarBuilder:
+          configuration.spellCheckSuggestionsToolbarBuilder ??
+              DetectableTextField.defaultSpellCheckSuggestionsToolbarBuilder,
+    );
+  }
+
   @override
   _DetectableTextFieldState createState() => _DetectableTextFieldState();
 
@@ -916,6 +968,9 @@ class DetectableTextField extends StatefulWidget {
         defaultValue: null));
     properties.add(DiagnosticsProperty<ScrollPhysics>(
         'scrollPhysics', scrollPhysics,
+        defaultValue: null));
+    properties.add(DiagnosticsProperty<SpellCheckConfiguration>(
+        'spellCheckConfiguration', spellCheckConfiguration,
         defaultValue: null));
   }
 }
@@ -1287,6 +1342,28 @@ class _DetectableTextFieldState extends State<DetectableTextField>
         break;
     }
 
+    // Set configuration as disabled if not otherwise specified. If specified,
+    // ensure that configuration uses the correct style for misspelled words for
+    // the current platform, unless a custom style is specified.
+    final SpellCheckConfiguration spellCheckConfiguration;
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        spellCheckConfiguration =
+            CupertinoTextField.inferIOSSpellCheckConfiguration(
+          widget.spellCheckConfiguration,
+        );
+        break;
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        spellCheckConfiguration = TextField.inferAndroidSpellCheckConfiguration(
+          widget.spellCheckConfiguration,
+        );
+        break;
+    }
+
     Widget child = RepaintBoundary(
       child: UnmanagedRestorationScope(
         bucket: bucket,
@@ -1352,7 +1429,7 @@ class _DetectableTextFieldState extends State<DetectableTextField>
           autofillHints: widget.autofillHints,
           autocorrectionTextRectColor: autocorrectionTextRectColor,
           restorationId: 'editable',
-          spellCheckConfiguration: widget.spellCheckConfiguration,
+          spellCheckConfiguration: spellCheckConfiguration,
         ),
       ),
     );
