@@ -1,24 +1,24 @@
+import 'package:detectable_text_field/detectable_text_field.dart';
 import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
-import 'package:detectable_text_field/widgets/detectable_text.dart';
 import 'package:detectable_text_field/widgets/detectable_text_field.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -30,7 +30,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detectable text field sample"),
+        title: const Text("Detectable text field sample"),
       ),
       body: Center(
         child: Padding(
@@ -64,12 +64,12 @@ class MyHomePage extends StatelessWidget {
                     debugPrint('DetectableText >>>>>>> http');
                   }
                 },
-                basicStyle: TextStyle(
+                basicStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   color: Colors.grey,
                 ),
-                detectedStyle: TextStyle(
+                detectedStyle: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.5,
@@ -87,7 +87,8 @@ class MyHomePage extends StatelessWidget {
                   print('finished');
                 },
               ),
-              TextField(),
+              DetectableTextFieldV2(),
+              const TextField(),
             ],
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 /// DataModel to explain the unit of word in decoration system
-class Detection extends Comparable<Detection> {
+class Detection implements Comparable<Detection> {
   Detection({required this.range, this.style, this.emojiStartPoint});
 
   final TextRange range;
@@ -101,12 +101,12 @@ class Detector {
   List<Detection> getDetections(String copiedText) {
     /// Text to change emoji into replacement text
     final fullWidthRegExp = RegExp(
-        r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
+        r"(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])");
 
     final fullWidthRegExpMatches =
         fullWidthRegExp.allMatches(copiedText).toList();
     final tokenRegExp =
-        RegExp(r'[・ぁ-んーァ-ヶ一-龥\u1100-\u11FF\uAC00-\uD7A3０-９ａ-ｚＡ-Ｚ　]');
+        RegExp(r"[・ぁ-んーァ-ヶ一-龥\u1100-\u11FF\uAC00-\uD7A3０-９ａ-ｚＡ-Ｚ　]");
     final emojiMatches = fullWidthRegExpMatches
         .where((match) => (!tokenRegExp
             .hasMatch(copiedText.substring(match.start, match.end))))
