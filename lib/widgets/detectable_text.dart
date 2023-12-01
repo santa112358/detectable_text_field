@@ -190,14 +190,6 @@ class _DetectableTextState extends State<DetectableText> {
         switch (widget.trimMode) {
           case TrimMode.Length:
             if (widget.trimLength < widget.text.length) {
-              // textSpan = TextSpan(
-              //   style: style,
-              //   text: _readMore
-              //       ? widget.text.substring(0, widget.trimLength)
-              //       : widget.text,
-              //   children: <TextSpan>[_delimiter, link],
-              // );
-
               textSpan = TextPatternDetector.getDetectedTextSpanWithExtraChild(
                 decoratedStyle: dStyle,
                 basicStyle: style,
