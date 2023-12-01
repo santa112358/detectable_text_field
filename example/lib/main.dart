@@ -1,7 +1,8 @@
 import 'package:detectable_text_field/detectable_text_field.dart';
 import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
-import 'package:detectable_text_field/widgets/detectable_text_field.dart';
+import 'package:example/hooks.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,11 +24,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends HookWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = useDetectableTextEditingController(
+      regExp: detectionRegExp()!,
+    );
+    useListenable(controller);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Detectable text field sample"),
@@ -51,11 +56,11 @@ class MyHomePage extends StatelessWidget {
                   "(?!\\n)(?:^|\\s)([#@]([$detectionContentLetters]+))|$urlRegexContent",
                   multiLine: true,
                 ),
-                callback: (bool readMore) {
+                onExpansionChanged: (bool readMore) {
                   debugPrint('Read more >>>>>>> $readMore');
                 },
                 onTap: (tappedText) async {
-                  print(tappedText);
+                  debugPrint(tappedText);
                   if (tappedText.startsWith('#')) {
                     debugPrint('DetectableText >>>>>>> #');
                   } else if (tappedText.startsWith('@')) {
@@ -77,18 +82,12 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              DetectableTextField(
-                maxLines: null,
-                detectionRegExp: detectionRegExp()!,
-                onDetectionTyped: (text) {
-                  print(text);
-                },
-                onDetectionFinished: () {
-                  print('finished');
-                },
+              Text(
+                'Typing detection: ${controller.typingDetection}',
               ),
-              DetectableTextFieldV2(),
-              const TextField(),
+              DetectableTextFieldV2(
+                controller: controller,
+              ),
             ],
           ),
         ),
