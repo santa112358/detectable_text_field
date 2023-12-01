@@ -13,7 +13,7 @@ Refinement of [hashtagable](https://pub.dev/packages/hashtagable).
 
 ## Usage
 
-### As TextField
+### TextField
 
 ```dart
     DetectableTextField(
@@ -22,16 +22,14 @@ Refinement of [hashtagable](https://pub.dev/packages/hashtagable).
         fontSize: 20,
         color: Colors.blue,
       ),
-      basicStyle: TextStyle(
-        fontSize: 20,
-      ),
     )
 ```
-- `detectionRegExp` decides the text to detect. `detectedStyle` is the textStyle for detected text. basicStyle is the textStyle for not detected text.
+- `detectionRegExp` decides the text to detect. 
+- `detectedStyle` is the textStyle for detected text.
 
 - Other arguments are basically same as material TextField.
 
-### As ReadOnlyText
+### ReadOnlyText
 
 If you want to use detection feature in the text only to display, `DetectableText` will help you.
 
@@ -79,7 +77,7 @@ If you see the [API reference](https://pub.dev/documentation/detectable_text_fie
 | `hashTagAtSignUrlRegExp`|○|○|○|
 
 
-- The detection rules are almost same as twitter.
+- The detection rules are almost same as X(formally twitter). 
    1. It needs space before `#` or `@`.
    2. It stops `#` and `@` detection if there's emoji or symbol.
 
