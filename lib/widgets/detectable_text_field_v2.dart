@@ -1,12 +1,12 @@
 import 'package:detectable_text_field/widgets/detectable_text_editing_controller.dart';
 import 'package:flutter/material.dart';
 
-// TODO(santa): onDetectionFinished, onDetectionTyped, onDetectionErased,
 class DetectableTextFieldV2 extends TextField {
   DetectableTextFieldV2({
     super.key,
     RegExp? regExp,
     DetectableTextEditingController? controller,
+    TextStyle? detectedStyle,
     super.focusNode,
     super.undoController,
     super.decoration,
@@ -70,8 +70,15 @@ class DetectableTextFieldV2 extends TextField {
           !(regExp != null && controller != null),
           'Cannot provide both a regExp and a controller. Use a controller to define regExp.\n Example: DetectableTextEditingController(regExp: yourRexExp)',
         ),
+        assert(
+          !(detectedStyle != null && controller != null),
+          'Cannot provide both a detectedStyle and a controller. Use a controller to define detectedStyle.\n Example: DetectableTextEditingController(detectedStyle : yourDetectedStyle)',
+        ),
         super(
-          controller:
-              controller ?? DetectableTextEditingController(regExp: regExp),
+          controller: controller ??
+              DetectableTextEditingController(
+                regExp: regExp,
+                detectedStyle: detectedStyle,
+              ),
         );
 }

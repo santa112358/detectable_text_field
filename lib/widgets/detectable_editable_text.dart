@@ -177,7 +177,6 @@ class DetectableEditableTextState extends EditableTextState {
     final detections = detector.getDetections(textEditingValue.text);
     final composer = Composer(
       selection: textEditingValue.selection.start,
-      onDetectionTyped: widget.onDetectionTyped,
       sourceText: textEditingValue.text,
       detectedStyle: widget.detectedStyle,
       detections: detections,
@@ -203,7 +202,6 @@ class DetectableEditableTextState extends EditableTextState {
     final detections = detector.getDetections(textEditingValue.text);
     final composer = Composer(
       selection: textEditingValue.selection.start,
-      onDetectionTyped: widget.onDetectionTyped,
       sourceText: textEditingValue.text,
       detectedStyle: widget.detectedStyle,
       detections: detections,

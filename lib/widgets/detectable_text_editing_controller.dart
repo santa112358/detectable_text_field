@@ -6,14 +6,40 @@ import 'package:flutter/material.dart';
 class DetectableTextEditingController extends TextEditingController {
   DetectableTextEditingController({
     this.regExp,
-    this.onTap,
     this.detectedStyle,
     super.text,
   });
 
   final RegExp? regExp;
-  final ValueChanged<String>? onTap;
   final TextStyle? detectedStyle;
+
+  String? get typingDetection {
+    final detector = Detector(
+      textStyle: const TextStyle(),
+      detectedStyle: detectedStyle ??
+          const TextStyle(
+            color: Colors.blue,
+          ),
+      detectionRegExp: regExp ?? detectionRegExp()!,
+    );
+    final detections = detector.getDetections(text);
+    final composer = Composer(
+      selection: value.selection.start,
+      sourceText: value.text,
+      detectedStyle: detectedStyle ??
+          const TextStyle(
+            color: Colors.blue,
+          ),
+      detections: detections,
+      composing: value.composing,
+    );
+    final typingRange = composer.typingDetection()?.range;
+    if (typingRange == null) {
+      return null;
+    } else {
+      return typingRange.textInside(value.text);
+    }
+  }
 
   @override
   TextSpan buildTextSpan({
@@ -35,7 +61,6 @@ class DetectableTextEditingController extends TextEditingController {
     final detections = detector.getDetections(text);
     final composer = Composer(
       selection: value.selection.start,
-      onDetectionTyped: onTap,
       sourceText: value.text,
       detectedStyle: detectedStyle,
       detections: detections,
