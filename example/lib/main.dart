@@ -1,6 +1,6 @@
 import 'package:detectable_text_field/detectable_text_field.dart';
 import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
-import 'package:example/hooks.dart';
+import 'package:example/use_detectable_text_editing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
