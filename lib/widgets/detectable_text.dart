@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../functions.dart';
+import '../detector/text_pattern_detector.dart';
 
 enum TrimMode {
   Length,
@@ -40,7 +40,7 @@ class DetectableText extends StatefulWidget {
     this.trimLines = 2,
     this.trimMode = TrimMode.Length,
     this.delimiter = _kEllipsis + ' ',
-    this.callback,
+    this.onExpansionChanged,
   });
 
   final String text;
@@ -78,7 +78,7 @@ class DetectableText extends StatefulWidget {
   final TextStyle? lessStyle;
 
   ///Called when state change between expanded/compress
-  final Function(bool val)? callback;
+  final Function(bool val)? onExpansionChanged;
 
   final String trimExpandedText;
   final String trimCollapsedText;
@@ -94,14 +94,15 @@ class _DetectableTextState extends State<DetectableText> {
   void _onTapLink() {
     setState(() {
       _readMore = !_readMore;
-      widget.callback?.call(_readMore);
+      widget.onExpansionChanged?.call(_readMore);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final TextStyle style = theme.textTheme.subtitle1!.merge(widget.basicStyle);
+    final TextStyle style =
+        theme.textTheme.titleMedium!.merge(widget.basicStyle);
     final dStyle = widget.detectedStyle ?? style.copyWith(color: Colors.blue);
 
     final _defaultLessStyle = widget.lessStyle ?? style;
@@ -133,7 +134,7 @@ class _DetectableTextState extends State<DetectableText> {
         final double maxWidth = constraints.maxWidth;
 
         // Create a TextSpan with data
-        final text = getDetectedTextSpan(
+        final text = TextPatternDetector.getDetectedTextSpan(
           decoratedStyle: dStyle,
           basicStyle: style,
           onTap: widget.onTap,
@@ -189,15 +190,7 @@ class _DetectableTextState extends State<DetectableText> {
         switch (widget.trimMode) {
           case TrimMode.Length:
             if (widget.trimLength < widget.text.length) {
-              // textSpan = TextSpan(
-              //   style: style,
-              //   text: _readMore
-              //       ? widget.text.substring(0, widget.trimLength)
-              //       : widget.text,
-              //   children: <TextSpan>[_delimiter, link],
-              // );
-
-              textSpan = getDetectedTextSpanWithExtraChild(
+              textSpan = TextPatternDetector.getDetectedTextSpanWithExtraChild(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
@@ -209,7 +202,7 @@ class _DetectableTextState extends State<DetectableText> {
                 children: <TextSpan>[_delimiter, link],
               );
             } else {
-              textSpan = getDetectedTextSpan(
+              textSpan = TextPatternDetector.getDetectedTextSpan(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
@@ -220,16 +213,7 @@ class _DetectableTextState extends State<DetectableText> {
             break;
           case TrimMode.Line:
             if (textPainter.didExceedMaxLines) {
-              // textSpan = TextSpan(
-              //   style: style,
-              //   text: _readMore
-              //       ? widget.text.substring(0, endIndex) +
-              //       (linkLongerThanLine ? _kLineSeparator : '')
-              //       : widget.text,
-              //   children: <TextSpan>[_delimiter, link],
-              // );
-
-              textSpan = getDetectedTextSpanWithExtraChild(
+              textSpan = TextPatternDetector.getDetectedTextSpanWithExtraChild(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
@@ -241,7 +225,7 @@ class _DetectableTextState extends State<DetectableText> {
                 children: <TextSpan>[_delimiter, link],
               );
             } else {
-              textSpan = getDetectedTextSpan(
+              textSpan = TextPatternDetector.getDetectedTextSpan(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
@@ -255,17 +239,6 @@ class _DetectableTextState extends State<DetectableText> {
             throw Exception(
                 'TrimMode type: ${widget.trimMode} is not supported');
         }
-
-        // return RichText(
-        //   textAlign: textAlign,
-        //   textDirection: textDirection,
-        //   softWrap: true,
-        //   //softWrap,
-        //   overflow: TextOverflow.clip,
-        //   //overflow,
-        //   textScaleFactor: textScaleFactor,
-        //   text: textSpan,
-        // );
 
         return RichText(
           text: textSpan,
@@ -284,25 +257,5 @@ class _DetectableTextState extends State<DetectableText> {
     );
 
     return result;
-
-    // return RichText(
-    //   text: getDetectedTextSpan(
-    //     decoratedStyle: dStyle,
-    //     basicStyle: style,
-    //     onTap: widget.onTap,
-    //     source: widget.text,
-    //     detectionRegExp: widget.detectionRegExp,
-    //   ),
-    //   textAlign: widget.textAlign,
-    //   textDirection: widget.textDirection,
-    //   softWrap: widget.softWrap,
-    //   overflow: widget.overflow,
-    //   textScaleFactor: widget.textScaleFactor,
-    //   maxLines: widget.maxLines,
-    //   locale: widget.locale,
-    //   strutStyle: widget.strutStyle,
-    //   textWidthBasis: widget.textWidthBasis,
-    //   textHeightBehavior: widget.textHeightBehavior,
-    // );
   }
 }
