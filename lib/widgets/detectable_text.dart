@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../functions.dart';
+import '../detector/text_pattern_detector.dart';
 
 enum TrimMode {
   Length,
@@ -134,7 +134,7 @@ class _DetectableTextState extends State<DetectableText> {
         final double maxWidth = constraints.maxWidth;
 
         // Create a TextSpan with data
-        final text = getDetectedTextSpan(
+        final text = TextPatternDetector.getDetectedTextSpan(
           decoratedStyle: dStyle,
           basicStyle: style,
           onTap: widget.onTap,
@@ -198,7 +198,7 @@ class _DetectableTextState extends State<DetectableText> {
               //   children: <TextSpan>[_delimiter, link],
               // );
 
-              textSpan = getDetectedTextSpanWithExtraChild(
+              textSpan = TextPatternDetector.getDetectedTextSpanWithExtraChild(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
@@ -210,7 +210,7 @@ class _DetectableTextState extends State<DetectableText> {
                 children: <TextSpan>[_delimiter, link],
               );
             } else {
-              textSpan = getDetectedTextSpan(
+              textSpan = TextPatternDetector.getDetectedTextSpan(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
@@ -221,7 +221,7 @@ class _DetectableTextState extends State<DetectableText> {
             break;
           case TrimMode.Line:
             if (textPainter.didExceedMaxLines) {
-              textSpan = getDetectedTextSpanWithExtraChild(
+              textSpan = TextPatternDetector.getDetectedTextSpanWithExtraChild(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,
@@ -233,7 +233,7 @@ class _DetectableTextState extends State<DetectableText> {
                 children: <TextSpan>[_delimiter, link],
               );
             } else {
-              textSpan = getDetectedTextSpan(
+              textSpan = TextPatternDetector.getDetectedTextSpan(
                 decoratedStyle: dStyle,
                 basicStyle: style,
                 onTap: widget.onTap,

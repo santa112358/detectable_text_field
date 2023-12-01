@@ -1,5 +1,5 @@
 import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
-import 'package:detectable_text_field/functions.dart';
+import 'package:detectable_text_field/detector/text_pattern_detector.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -17,7 +17,7 @@ void main() {
         dotAll: true,
       );
       final source = "http://foo.com/blah_blah";
-      final matches = extractDetections(source, regex);
+      final matches = TextPatternDetector.extractDetections(source, regex);
       print(matches);
       expect(regex.hasMatch(source), true);
     },
@@ -30,7 +30,7 @@ void main() {
       );
       final source =
           "Stop dhttp://foo.com/blah_blah oio#firebase notDetectThis @hello noDetection";
-      final matches = extractDetections(source, regex);
+      final matches = TextPatternDetector.extractDetections(source, regex);
       print(matches);
       expect(regex.hasMatch(source), true);
     },

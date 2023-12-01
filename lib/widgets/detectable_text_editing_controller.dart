@@ -1,10 +1,11 @@
 import 'package:detectable_text_field/composer/composer.dart';
-import 'package:detectable_text_field/detector/detector.dart';
+import 'package:detectable_text_field/detector/detection.dart';
 import 'package:detectable_text_field/detector/sample_regular_expressions.dart';
 import 'package:flutter/material.dart';
 
 class DetectableTextEditingController extends TextEditingController {
   DetectableTextEditingController({
+    /// [detectionRegExp] is used by default.
     this.regExp,
     this.detectedStyle,
     super.text,
@@ -14,7 +15,7 @@ class DetectableTextEditingController extends TextEditingController {
   final TextStyle? detectedStyle;
 
   String? get typingDetection {
-    final detector = Detector(
+    final detections = value.text.toDetections(
       textStyle: const TextStyle(),
       detectedStyle: detectedStyle ??
           const TextStyle(
@@ -22,7 +23,6 @@ class DetectableTextEditingController extends TextEditingController {
           ),
       detectionRegExp: regExp ?? detectionRegExp()!,
     );
-    final detections = detector.getDetections(text);
     final composer = Composer(
       selection: value.selection.start,
       sourceText: value.text,
@@ -53,12 +53,11 @@ class DetectableTextEditingController extends TextEditingController {
         baseStyle.copyWith(
           color: Colors.blue,
         );
-    final detector = Detector(
+    final detections = text.toDetections(
       textStyle: baseStyle,
       detectedStyle: detectedStyle,
       detectionRegExp: regExp,
     );
-    final detections = detector.getDetections(text);
     final composer = Composer(
       selection: value.selection.start,
       sourceText: value.text,

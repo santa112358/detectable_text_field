@@ -1,4 +1,4 @@
-import 'package:detectable_text_field/detector/detector.dart';
+import 'package:detectable_text_field/detector/detection.dart';
 import 'package:flutter/material.dart';
 
 /// Add composing to hashtag decorated text.
@@ -94,10 +94,5 @@ class Composer {
     } else {
       return null;
     }
-  }
-
-  void callOnDetectionTyped() {
-    final typingRange = typingDetection()?.range;
-    if (typingRange != null) {}
   }
 }

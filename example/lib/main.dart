@@ -85,7 +85,7 @@ class MyHomePage extends HookWidget {
               Text(
                 'Typing detection: ${controller.typingDetection}',
               ),
-              DetectableTextFieldV2(
+              DetectableTextField(
                 controller: controller,
               ),
             ],
