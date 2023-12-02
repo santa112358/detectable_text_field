@@ -3,27 +3,6 @@ import 'package:detectable_text_field/widgets/detectable_text_editing_controller
 import 'package:detectable_text_field/widgets/detectable_text_field.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const TextFieldExample(),
-      // home: const HooksExample(),
-    );
-  }
-}
-
 class TextFieldExample extends StatefulWidget {
   const TextFieldExample({super.key});
 
@@ -33,7 +12,7 @@ class TextFieldExample extends StatefulWidget {
 
 class _TextFieldExampleState extends State<TextFieldExample> {
   final controller = DetectableTextEditingController(
-    regExp: detectionRegExp(),
+    regExp: detectionRegExp()!,
   );
 
   @override
