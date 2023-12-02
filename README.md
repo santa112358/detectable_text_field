@@ -15,13 +15,7 @@ Refinement of [hashtagable](https://pub.dev/packages/hashtagable).
 
 ## Usage
 
-### TextField
-
-Depending on your specific requirements, you can choose from several configurations.
-
-#### DetectableTextField
-
-Straightforward usage. Just use `DetectableTextField`.
+### DetectableTextField
 
 ```dart
     DetectableTextField(
@@ -36,7 +30,7 @@ Straightforward usage. Just use `DetectableTextField`.
 - `detectionRegExp` decides the text to detect.
 - `detectedStyle` is the textStyle for detected text.
 
-#### DetectableTextEditingController
+### DetectableTextEditingController
 
 DetectableTextEditingController allows you to listen to the `typingDetection`. Ideal for features
 like live hashtag or mention detection.
@@ -80,9 +74,9 @@ If you use flutter_hooks, `useDetectableTextEditingController` is also available
 
 
 
-### ReadOnlyText
+### DetectableText
 
-If you want to use detection feature in the text only to display, `DetectableText` will help you.
+If you want to use detection feature in the text only to display, use `DetectableText`.
 
 ```dart
     DetectableText(
@@ -105,17 +99,12 @@ Usage of the arguments like `detectionRegExp` are same as the ones in `Detectabl
 
 The argument `onTap(String)` is called when user tapped a detected text.
 
-You can add some actions in this callback with the tapped text.
-
 ### `detectionRegExp()`
 
 The widgets and methods in this package is expected to be used with RegExp.
 
-The function `detectionRegExp()` returns sample regExp depending om the boolean arguments: `hashtag`
-, `atSign`, and `url`.They are all `true` by default.
-
-If you do **NOT** want to detect atSign, you need to set the argument like
-this: `detectionRegExp(atSign:false)`. It is same for other arguments.
+The function `detectionRegExp()` returns sample regExp depending on the boolean arguments: `hashtag`
+, `atSign`, and `url`.They are all true by default.
 
 If you see
 the [API reference](https://pub.dev/documentation/detectable_text_field/latest/detector_sample_regular_expressions/detectionRegExp.html)
