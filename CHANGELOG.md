@@ -1,3 +1,6 @@
+## [3.0.1]
+- Fix analysis problems
+
 ## [3.0.0]
 
 - **Breaking**: Removed `onDetectionTyped` and `onDetectionFinished` from `DetectableTextField`.
