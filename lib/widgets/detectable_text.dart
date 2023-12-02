@@ -25,7 +25,7 @@ class DetectableText extends StatefulWidget {
     this.textDirection,
     this.softWrap = true,
     this.overflow = TextOverflow.clip,
-    this.textScaleFactor = 1.0,
+    this.textScaler = TextScaler.noScaling,
     this.maxLines,
     this.locale,
     this.strutStyle,
@@ -51,7 +51,7 @@ class DetectableText extends StatefulWidget {
   final TextDirection? textDirection;
   final bool softWrap;
   final TextOverflow overflow;
-  final double textScaleFactor;
+  final TextScaler textScaler;
   final int? maxLines;
   final Locale? locale;
   final StrutStyle? strutStyle;
@@ -147,7 +147,7 @@ class _DetectableTextState extends State<DetectableText> {
           text: link,
           textAlign: widget.textAlign,
           textDirection: textDirection,
-          textScaleFactor: widget.textScaleFactor,
+          textScaler: widget.textScaler,
           maxLines: widget.trimLines,
           ellipsis: overflow == TextOverflow.ellipsis ? widget.delimiter : null,
           locale: locale,
@@ -246,7 +246,7 @@ class _DetectableTextState extends State<DetectableText> {
           textDirection: textDirection,
           softWrap: widget.softWrap,
           overflow: widget.overflow,
-          textScaleFactor: widget.textScaleFactor,
+          textScaler: widget.textScaler,
           maxLines: widget.maxLines,
           locale: widget.locale,
           strutStyle: widget.strutStyle,
