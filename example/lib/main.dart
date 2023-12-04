@@ -46,17 +46,19 @@ class _TextFieldExampleState extends State<TextFieldExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          'Typing detection: ${controller.typingDetection}',
-        ),
-        DetectableTextField(
-          controller: controller,
-        ),
-      ],
+    return Material(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Typing detection: ${controller.typingDetection}',
+          ),
+          DetectableTextField(
+            controller: controller,
+          ),
+        ],
+      )
     );
   }
 }
