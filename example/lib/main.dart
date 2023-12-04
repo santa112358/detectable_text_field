@@ -46,8 +46,11 @@ class _TextFieldExampleState extends State<TextFieldExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('DetectableTextField Example'),
+      ),
+      body: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -58,7 +61,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
             controller: controller,
           ),
         ],
-      )
+      ),
     );
   }
 }
