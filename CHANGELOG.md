@@ -1,4 +1,9 @@
+## [3.0.2]
+
+- Fix example
+
 ## [3.0.1]
+
 - Fix analysis problems
 
 ## [3.0.0]
