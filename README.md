@@ -1,7 +1,7 @@
 # detectable_text_field
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![pub package](https://img.shields.io/pub/v/detectable_text_field.svg)](https://pub.dev/packages/detectable_text_field) <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="License: MIT"></a>
@@ -180,6 +180,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/xuxiaowei13"><img src="https://avatars.githubusercontent.com/u/10124443?v=4?s=100" width="100px;" alt="xuxiaowei13"/><br /><sub><b>xuxiaowei13</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=xuxiaowei13" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.debuggerx.com"><img src="https://avatars.githubusercontent.com/u/19624835?v=4?s=100" width="100px;" alt="debuggerx01"/><br /><sub><b>debuggerx01</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=debuggerx01" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/furukaze-akane"><img src="https://avatars.githubusercontent.com/u/87937371?v=4?s=100" width="100px;" alt="furukaze-akane"/><br /><sub><b>furukaze-akane</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=furukaze-akane" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/drown0315"><img src="https://avatars.githubusercontent.com/u/108989782?v=4?s=100" width="100px;" alt="drown0315"/><br /><sub><b>drown0315</b></sub></a><br /><a href="https://github.com/santa112358/detectable_text_field/commits?author=drown0315" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
