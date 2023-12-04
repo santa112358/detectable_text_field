@@ -16,7 +16,7 @@ class HooksExample extends HookWidget {
     useListenable(controller);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Detectable text field sample"),
+        title: const Text("hooks example"),
       ),
       body: Center(
         child: Padding(
