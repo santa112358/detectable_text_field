@@ -41,6 +41,7 @@ class DetectableText extends StatefulWidget {
     this.trimMode = TrimMode.Length,
     this.delimiter = _kEllipsis + ' ',
     this.onExpansionChanged,
+    this.initialExpansion = false,
   });
 
   final String text;
@@ -80,6 +81,9 @@ class DetectableText extends StatefulWidget {
   ///Called when state change between expanded/compress
   final Function(bool val)? onExpansionChanged;
 
+  // initial state of expansion
+  final bool initialExpansion;
+
   final String trimExpandedText;
   final String trimCollapsedText;
   final Color? colorClickableText;
@@ -90,6 +94,11 @@ class DetectableText extends StatefulWidget {
 
 class _DetectableTextState extends State<DetectableText> {
   bool _readMore = true;
+
+  void initState() {
+    super.initState();
+    _readMore = !widget.initialExpansion;
+  }
 
   void _onTapLink() {
     setState(() {
